@@ -1,22 +1,27 @@
 import './App.css';
-import React from 'react';
+import React, { useState } from 'react';
 import DeleteIcon from '@mui/icons-material/Delete';
-
+import Zoom from '@mui/material/Zoom';
 import Slide from '@mui/material/Slide';
 
 function Note(props) {
+    const [hover, setHover] = useState(false);
     return (
-        <Slide direction="up" in={true}
+        <Slide direction="up" in={props.show}
             timeout={500} mountOnEnter unmountOnExit>
 
 
-            <div index={props.index} className='note' >
+            <div index={props.index} className='note' onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}>
                 <h6 className="note-title" style={{ textAlign: "center", fontWeight: "bold", }}>{props.title}</h6>
                 <p className="note-text" style={{ height: "50%", maxHeight: "90%", minHeight: "fit-content" }}>{props.noteText}</p>
 
-                <button style={{ border: "none", color: "orange", position: "absolute", right: "10px", top: "0", background: "transparent", fontSize: "12px" }} onClick={() => { props.handleDelete(props.index) }}>
-                    <DeleteIcon />
-                </button>
+                {(hover) &&
+                    <Zoom in={hover} timeout={500}>
+                        <button style={{ border: "none", color: "orange", position: "absolute", right: "10px", top: "0", background: "transparent", fontSize: "12px" }} onClick={(e) => { props.handleDelete(e, props.index) }}>
+                            <DeleteIcon />
+                        </button>
+                    </Zoom>
+                }
             </div>
         </Slide>
     )
