@@ -4,7 +4,9 @@ import Footer from './Footer';
 import Header from './Header';
 import Note from './Note';
 import AddNote from './AddNote';
+import data from "./data";
 function Car() {
+  console.log(data);
   const [todoList, setTodoList] = useState([])
   function addItem(noteText) {
     console.log(noteText)
