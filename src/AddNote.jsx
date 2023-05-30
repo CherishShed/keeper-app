@@ -17,7 +17,7 @@ const addButtonStyle = {
     color: "white"
 };
 function AddNote(props) {
-    const [noteText, setNoteText] = useState({ title: "", text: "" });
+    const [noteText, setNoteText] = useState({ title: "", body: "" });
     const [typing, setTyping] = useState(false);
     return (
         <form
@@ -28,7 +28,11 @@ function AddNote(props) {
                 margin: "0 auto",
                 position: "relative",
             }}
-
+            onSubmit={(event) => {
+                props.handleSubmit(noteText)
+                setNoteText({ title: "", body: "" })
+                event.preventDefault();
+            }}
         >
             {(typing) &&
                 <Zoom in={typing} timeout={1200}>
@@ -45,25 +49,19 @@ function AddNote(props) {
             <textarea
                 type="text"
                 onClick={() => { setTyping(true) }}
-                onChange={(e) => setNoteText({ ...noteText, text: e.target.value })}
+                onChange={(e) => setNoteText({ ...noteText, body: e.target.value })}
                 placeholder="Enter New note..."
                 name="noteText"
                 style={{ width: "100%" }}
-                value={noteText.text}
+                value={noteText.body}
                 required
             />
 
-            <Slide direction="up" in={typing}
-                timeout={500} mountOnEnter unmountOnExit>
 
-                <Fab className="btn" style={addButtonStyle} onClick={(event) => {
-                    props.handleSubmit(noteText)
-                    setNoteText({ title: "", text: "" })
-                    event.preventDefault();
-                }}>
-                    <AddIcon />
-                </Fab>
-            </Slide>
+            <Fab className="btn" style={addButtonStyle} type="submit">
+                <AddIcon />
+            </Fab>
+
 
         </form>
     );
