@@ -1,5 +1,9 @@
 import React, { useState } from "react";
-
+import AddIcon from '@mui/icons-material/Add';
+import Fab from '@mui/material/Fab';
+import Grow from '@mui/material/Grow';
+import Zoom from '@mui/material/Zoom';
+import Slide from '@mui/material/Slide';
 const addButtonStyle = {
     backgroundColor: "orange",
     width: "50px",
@@ -14,7 +18,7 @@ const addButtonStyle = {
 };
 function AddNote(props) {
     const [noteText, setNoteText] = useState({ title: "", text: "" });
-
+    const [typing, setTyping] = useState(false);
     return (
         <form
             className="addNoteContainer"
@@ -24,33 +28,43 @@ function AddNote(props) {
                 margin: "0 auto",
                 position: "relative",
             }}
-            onSubmit={(event) => {
-                props.handleSubmit(noteText)
-                setNoteText({ title: "", text: "" })
-                event.preventDefault();
-            }}
+
         >
-            <input
-                type="text"
-                onChange={(e) => setNoteText({ ...noteText, title: e.target.value })}
-                style={{ width: "100%", height: "30%" }}
-                name="title"
-                placeholder="Title..."
-                value={noteText.title}
-                required
-            />
+            {(typing) &&
+                <Zoom in={typing} timeout={1200}>
+                    <input
+                        type="text"
+                        onChange={(e) => setNoteText({ ...noteText, title: e.target.value })}
+                        name="title"
+                        placeholder="Title..."
+                        value={noteText.title}
+                        required
+                    /></Zoom>}
+
+
             <textarea
                 type="text"
+                onClick={() => { setTyping(true) }}
                 onChange={(e) => setNoteText({ ...noteText, text: e.target.value })}
                 placeholder="Enter New note..."
                 name="noteText"
-                style={{ width: "100%", height: "70%" }}
+                style={{ width: "100%" }}
                 value={noteText.text}
                 required
             />
-            <button className="btn" style={addButtonStyle}>
-                Add
-            </button>
+
+            <Slide direction="up" in={typing}
+                timeout={500} mountOnEnter unmountOnExit>
+
+                <Fab className="btn" style={addButtonStyle} onClick={(event) => {
+                    props.handleSubmit(noteText)
+                    setNoteText({ title: "", text: "" })
+                    event.preventDefault();
+                }}>
+                    <AddIcon />
+                </Fab>
+            </Slide>
+
         </form>
     );
 }

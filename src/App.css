@@ -5,7 +5,7 @@
 }
 
 body{
-  background-color:#eee;
+  background-image: url("../public/basketball-1920x1080.png");
   font-family:"Montserrat","Helvetica Neue"
 }
 
@@ -19,7 +19,7 @@ body{
 
 .addNoteContainer{
   width: 400px;
-  height: 150px;
+  height: fit-content;
   box-shadow: 2px 2px 2px#000;
   border-radius: 10px;
 }
@@ -34,8 +34,11 @@ input:focus, textarea:focus{
 input:first-child{
   border-bottom: 2px solid #eee;
   border-radius: 10px 10px 0 0;
+  width: 100%;
 }
-
+textarea{
+  height: fit-content;
+}
 .note{
   position: relative;
   background: white;
