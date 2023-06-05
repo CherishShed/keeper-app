@@ -1,9 +1,9 @@
 import './App.css';
 import React, { useState, useEffect } from 'react';
-import Footer from './Footer';
-import Header from './Header';
-import Note from './Note';
-import AddNote from './AddNote';
+import Footer from './components/Footer';
+import Header from './components/Header';
+import Note from './components/Note';
+import AddNote from './components/AddNote';
 import Skeleton from '@mui/material/Skeleton';
 // import data from "./data";
 import axios from "axios";
