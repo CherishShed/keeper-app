@@ -168,10 +168,10 @@ export default function ClippedDrawer(props) {
                 <Toolbar />
                 {(loading) &&
                     <div style={{ display: "flex", flexDirection: "row", gap: "50px", flexWrap: "wrap" }}>
-                        <Skeleton variant="rectangular" width="40%" height={100} sx={{ bgcolor: "grey.900" }} />
-                        <Skeleton variant="rectangular" width="40%" height={100} sx={{ bgcolor: "grey.900" }} />
-                        <Skeleton variant="rectangular" width="40%" height={100} sx={{ bgcolor: "grey.900" }} />
-                        <Skeleton variant="rectangular" width="40%" height={100} sx={{ bgcolor: "grey.900" }} />
+                        <Skeleton variant="rectangular" width="40%" height={100} sx={{ bgcolor: "#eee" }} />
+                        <Skeleton variant="rectangular" width="40%" height={100} sx={{ bgcolor: "#eee" }} />
+                        <Skeleton variant="rectangular" width="40%" height={100} sx={{ bgcolor: "#eee" }} />
+                        <Skeleton variant="rectangular" width="40%" height={100} sx={{ bgcolor: "#eee" }} />
                     </div>
                 }
                 {(!loading) &&
