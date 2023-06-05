@@ -12,6 +12,7 @@ import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import MuiAlert from '@mui/material/Alert';
 import Button from '@mui/material/Button';
+import TemporaryDrawer from './components/Nav';
 
 
 
@@ -70,6 +71,7 @@ function Car() {
 
   return (
     <div>
+      <TemporaryDrawer />
       <Header />
       <AddNote handleSubmit={addItem} />
       {(pending) &&

@@ -1,4 +1,3 @@
-import './App.css';
 import React, { useState } from 'react';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Zoom from '@mui/material/Zoom';
