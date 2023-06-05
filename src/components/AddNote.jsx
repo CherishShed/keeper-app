@@ -25,6 +25,7 @@ function AddNote(props) {
                 flexDirection: "column",
                 margin: "0 auto",
                 position: "relative",
+                marginTop: "100px",
             }}
             onSubmit={(event) => {
                 props.handleSubmit(noteText)

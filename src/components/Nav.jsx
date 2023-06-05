@@ -20,6 +20,7 @@ import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 import axios from 'axios';
 import Note from './Note';
+import Skeleton from '@mui/material/Skeleton';
 
 const drawerWidth = 240;
 
@@ -76,6 +77,7 @@ export default function ClippedDrawer(props) {
     // const theme = useTheme();
 
     const [todoList, setTodoList] = useState([]);
+    const [loading, setLoading] = useState(true)
     const [open, setOpen] = useState(false);
     function deleteItem(event, itemIndex) {
         setTodoList(todoList.filter((item, index) => index !== itemIndex));
@@ -89,8 +91,11 @@ export default function ClippedDrawer(props) {
         setOpen(false);
     };
     useEffect(() => {
-        setTodoList(props.todoList);
-    }, [props.todolist])
+        setTimeout(() => {
+            setTodoList(props.todoList);
+            setLoading(false);
+        }, 1000)
+    }, [props.todoList])
     return (
         <Box sx={{ display: "flex" }}>
             <CssBaseline />
@@ -125,7 +130,7 @@ export default function ClippedDrawer(props) {
                         <MenuIcon />
                     </IconButton>
                     <Typography variant="h6" noWrap component="div">
-                        Clipped Drawer
+                        ShediKeep
                     </Typography>
                 </Toolbar>
             </AppBar>
@@ -161,9 +166,19 @@ export default function ClippedDrawer(props) {
             </Drawer>
             <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
                 <Toolbar />
-                <div className="note-container">
-                    {todoList.map((item, index,) => <Note key={index} index={index} title={item.title} noteText={item.body} handleDelete={deleteItem} show={true} />)}
-                </div>
+                {(loading) &&
+                    <div style={{ display: "flex", flexDirection: "row", gap: "50px", flexWrap: "wrap" }}>
+                        <Skeleton variant="rectangular" width="40%" height={100} sx={{ bgcolor: "grey.900" }} />
+                        <Skeleton variant="rectangular" width="40%" height={100} sx={{ bgcolor: "grey.900" }} />
+                        <Skeleton variant="rectangular" width="40%" height={100} sx={{ bgcolor: "grey.900" }} />
+                        <Skeleton variant="rectangular" width="40%" height={100} sx={{ bgcolor: "grey.900" }} />
+                    </div>
+                }
+                {(!loading) &&
+                    <div className="note-container">
+                        {todoList.map((item, index,) => <Note key={index} index={index} title={item.title} noteText={item.body} handleDelete={deleteItem} show={true} />)}
+                    </div>
+                }
             </Box>
         </Box>
     );

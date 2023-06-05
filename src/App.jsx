@@ -4,7 +4,6 @@ import Footer from './components/Footer';
 import Header from './components/Header';
 import Note from './components/Note';
 import AddNote from './components/AddNote';
-import Skeleton from '@mui/material/Skeleton';
 // import data from "./data";
 import axios from "axios";
 import Snackbar from '@mui/material/Snackbar';
