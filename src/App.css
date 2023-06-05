@@ -62,3 +62,8 @@ textarea{
 footer{
   text-align: center;
 }
+
+.MuiBackdrop-root{
+background-color: purple;
+background: purple;
+}
