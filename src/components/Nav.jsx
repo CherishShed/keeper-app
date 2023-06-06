@@ -76,11 +76,11 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 export default function ClippedDrawer(props) {
     // const theme = useTheme();
 
-    const [todoList, setTodoList] = useState([]);
+    const [notes, setNotes] = useState([]);
     const [loading, setLoading] = useState(true)
     const [open, setOpen] = useState(false);
     function deleteItem(event, itemIndex) {
-        setTodoList(todoList.filter((item, index) => index !== itemIndex));
+        setNotes(notes.filter((item, index) => index !== itemIndex));
     }
 
     const handleDrawerOpen = () => {
@@ -92,10 +92,10 @@ export default function ClippedDrawer(props) {
     };
     useEffect(() => {
         setTimeout(() => {
-            setTodoList(props.todoList);
+            setNotes(props.notes);
             setLoading(false);
         }, 1000)
-    }, [props.todoList])
+    }, [props.notes])
     return (
         <Box sx={{ display: "flex" }}>
             <CssBaseline />
@@ -136,7 +136,7 @@ export default function ClippedDrawer(props) {
             </AppBar>
             <Drawer variant="permanent" open={open}>
                 <Toolbar />
-                <Box sx={{ overflow: "auto" }}>
+                <Box sx={{ overflow: "hidden" }}>
                     <List>
                         {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
                             <ListItem key={text} disablePadding>
@@ -176,7 +176,7 @@ export default function ClippedDrawer(props) {
                 }
                 {(!loading) &&
                     <div className="note-container">
-                        {todoList.map((item, index,) => <Note key={index} index={index} title={item.title} noteText={item.body} handleDelete={deleteItem} show={true} />)}
+                        {notes.map((item, index,) => <Note key={index} index={index} title={item.title} content={item.content} handleDelete={deleteItem} show={true} />)}
                     </div>
                 }
             </Box>

@@ -12,7 +12,7 @@ function Note(props) {
 
             <div index={props.index} className='note' onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)}>
                 <h6 className="note-title" style={{ textAlign: "center", fontWeight: "bold", }}>{props.title}</h6>
-                <p className="note-text" style={{ height: "50%", maxHeight: "90%", minHeight: "fit-content" }}>{props.noteText}</p>
+                <p className="note-text" style={{ height: "50%", maxHeight: "90%", minHeight: "fit-content" }}>{props.content}</p>
 
                 {(hover) &&
                     <Zoom in={hover} timeout={500}>
