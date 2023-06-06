@@ -35,6 +35,11 @@ function AddNote(props) {
                 setNoteText({ title: "", body: "" })
                 event.preventDefault();
             }}
+            onEmptied={(event) => {
+                if (noteText.title === "") {
+                    setTyping(false);
+                }
+            }}
         >
             {(typing) &&
                 <Zoom in={typing} timeout={1200}>
@@ -44,31 +49,32 @@ function AddNote(props) {
                         name="title"
                         placeholder="Title..."
                         value={noteText.title}
-                        color="secondary"
-                        required
+                        color="warning"
                         className="textfield"
                     /></Zoom>}
 
 
             <TextField
                 className="textfield"
-                color="secondary"
+                color="warning"
                 multiline
                 type="text"
-                onClick={() => { setTyping(true) }}
-                onChange={(e) => setNoteText({ ...noteText, body: e.target.value })}
+                onChange={(e) => {
+                    setTyping((e.target.value !== "") ? true : false);
+                    setNoteText({ ...noteText, body: e.target.value })
+                }}
                 // color="#967E76"
                 placeholder="Enter New note..."
                 name="noteText"
                 style={{ width: "100%" }}
                 value={noteText.body}
-                required
             />
 
-
-            <Fab className="btn" style={addButtonStyle} type="submit">
-                <AddIcon />
-            </Fab>
+            {(typing) &&
+                <Fab className="btn" style={addButtonStyle} type="submit">
+                    <AddIcon />
+                </Fab>
+            }
 
 
         </form>
