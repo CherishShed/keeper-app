@@ -2,8 +2,9 @@ import React, { useState } from "react";
 import AddIcon from '@mui/icons-material/Add';
 import Fab from '@mui/material/Fab';
 import Zoom from '@mui/material/Zoom';
+import { TextField } from "@mui/material";
 const addButtonStyle = {
-    backgroundColor: "orange",
+    backgroundColor: "#9BABB8",
     width: "50px",
     fontSize: "12px",
     borderRadius: "50%",
@@ -12,7 +13,8 @@ const addButtonStyle = {
     right: "20px",
     textAlign: "center",
     fontWeight: "bold",
-    color: "white"
+    color: "white",
+    outlineColor: "#967E76"
 };
 function AddNote(props) {
     const [noteText, setNoteText] = useState({ title: "", body: "" });
@@ -23,9 +25,10 @@ function AddNote(props) {
             style={{
                 display: "flex",
                 flexDirection: "column",
-                margin: "0 auto",
+                margin: "30px auto",
                 position: "relative",
-                marginTop: "100px",
+                top: "50px",
+                marginBottom: "20px"
             }}
             onSubmit={(event) => {
                 props.handleSubmit(noteText)
@@ -35,20 +38,26 @@ function AddNote(props) {
         >
             {(typing) &&
                 <Zoom in={typing} timeout={1200}>
-                    <input
+                    <TextField
                         type="text"
                         onChange={(e) => setNoteText({ ...noteText, title: e.target.value })}
                         name="title"
                         placeholder="Title..."
                         value={noteText.title}
+                        color="secondary"
                         required
+                        className="textfield"
                     /></Zoom>}
 
 
-            <textarea
+            <TextField
+                className="textfield"
+                color="secondary"
+                multiline
                 type="text"
                 onClick={() => { setTyping(true) }}
                 onChange={(e) => setNoteText({ ...noteText, body: e.target.value })}
+                // color="#967E76"
                 placeholder="Enter New note..."
                 name="noteText"
                 style={{ width: "100%" }}

@@ -62,7 +62,8 @@ function Home() {
     }
 
     return (
-        <div>
+        <div style={{ backgroundColor: "#EEE3CB", minHeight: "100vh" }}>
+
             <AddNote handleSubmit={addItem} />
             <TemporaryDrawer notes={notes} />
 

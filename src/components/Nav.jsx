@@ -103,6 +103,7 @@ export default function ClippedDrawer(props) {
                 position="fixed"
                 sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}
                 open={open}
+                style={{ backgroundColor: "#9BABB8" }}
             >
                 <Toolbar>
                     <IconButton
