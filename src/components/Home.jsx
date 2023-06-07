@@ -18,6 +18,8 @@ function Home() {
 
     const [notes, setNotes] = useState([]);
     const [open, setOpen] = useState(false);
+    const [snackText, setSnackText] = useState("")
+    const [alertType, setAlertType] = useState("")
     const Alert = React.forwardRef(function Alert(props, ref) {
         return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
     });
@@ -31,9 +33,6 @@ function Home() {
 
     const action = (
         <React.Fragment>
-            <Button color="dark" size="small" onClick={handleClose}>
-                UNDO
-            </Button>
             <IconButton
                 size="small"
                 aria-label="close"
@@ -44,20 +43,42 @@ function Home() {
             </IconButton>
         </React.Fragment>
     );
+
+    function getAllData() {
+        const data = axios.get("http://localhost:8081/");
+        data.then(response => {
+            console.log(response);
+            setNotes([...response.data.data])
+        })
+    }
     useEffect(() => {
         setTimeout(() => {
-            const data = axios.get("http://localhost:8081/");
-            data.then(response => {
-                setNotes([...notes, ...(response.data).splice(0, 10)])
-            })
+            getAllData()
         }, 1000)
     }, []);
 
+    function showAlert(status) {
+        setSnackText(status)
+        setAlertType(status);
+    }
+
     function addItem(noteText) {
+        console.log("creating")
         console.log(noteText)
         if (noteText) {
-            setNotes([...notes, noteText]);
-            setOpen(true);
+            console.log("posting")
+            const posting = axios.post("http://localhost:8081/", noteText);
+            posting.then((response) => {
+                console.log(response);
+                console.log("in here")
+                if (response.data.status === "success") {
+                    getAllData();
+                }
+
+                setOpen(true);
+                showAlert(response.data.status)
+
+            })
         }
     }
 
@@ -65,8 +86,7 @@ function Home() {
         <div style={{ backgroundColor: "#EEE3CB", minHeight: "100vh" }}>
 
             <AddNote handleSubmit={addItem} />
-            <TemporaryDrawer notes={notes} />
-
+            <TemporaryDrawer notes={notes} showAlert={showAlert} />
             <div>
                 <Snackbar
                     open={open}
@@ -74,8 +94,8 @@ function Home() {
                     onClose={handleClose}
                     action={action}
 
-                ><Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
-                        Note Added
+                ><Alert onClose={handleClose} severity={alertType} sx={{ width: '100%' }}>
+                        {snackText}
                     </Alert></Snackbar>
             </div>
             <Footer />

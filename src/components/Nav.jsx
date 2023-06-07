@@ -18,7 +18,7 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
-import axios from 'axios';
+import axios, { Axios } from 'axios';
 import Note from './Note';
 import Skeleton from '@mui/material/Skeleton';
 
@@ -80,7 +80,16 @@ export default function ClippedDrawer(props) {
     const [loading, setLoading] = useState(true)
     const [open, setOpen] = useState(false);
     function deleteItem(event, itemIndex) {
-        setNotes(notes.filter((item, index) => index !== itemIndex));
+        const itemToDelete = notes[itemIndex]
+        console.log(itemToDelete._id);
+        axios.delete(`http://localhost:8081/${itemToDelete._id}`)
+            .then((response) => {
+                console.log(response);
+                if (response.data.status === "success") {
+                    setNotes(notes.filter((item, index) => index !== itemIndex));
+                }
+                props.showAlert(response.data.status)
+            })
     }
 
     const handleDrawerOpen = () => {

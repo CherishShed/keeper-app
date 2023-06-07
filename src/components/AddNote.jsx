@@ -17,7 +17,7 @@ const addButtonStyle = {
     outlineColor: "#967E76"
 };
 function AddNote(props) {
-    const [noteText, setNoteText] = useState({ title: "", body: "" });
+    const [noteText, setNoteText] = useState({ title: "", content: "" });
     const [typing, setTyping] = useState(false);
     return (
         <form
@@ -32,7 +32,7 @@ function AddNote(props) {
             }}
             onSubmit={(event) => {
                 props.handleSubmit(noteText)
-                setNoteText({ title: "", body: "" })
+                setNoteText({ title: "", content: "" })
                 event.preventDefault();
             }}
             onEmptied={(event) => {
@@ -61,13 +61,13 @@ function AddNote(props) {
                 type="text"
                 onChange={(e) => {
                     setTyping((e.target.value !== "") ? true : false);
-                    setNoteText({ ...noteText, body: e.target.value })
+                    setNoteText({ ...noteText, content: e.target.value })
                 }}
                 // color="#967E76"
                 placeholder="Enter New note..."
                 name="noteText"
                 style={{ width: "100%" }}
-                value={noteText.body}
+                value={noteText.content}
             />
 
             {(typing) &&
