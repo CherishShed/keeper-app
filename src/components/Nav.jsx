@@ -88,7 +88,7 @@ export default function ClippedDrawer(props) {
                 if (response.data.status === "success") {
                     setNotes(notes.filter((item, index) => index !== itemIndex));
                 }
-                props.showAlert(response.data.status)
+                props.showAlert(response.data.status);
             })
     }
 

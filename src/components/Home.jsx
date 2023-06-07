@@ -60,6 +60,7 @@ function Home() {
     function showAlert(status) {
         setSnackText(status)
         setAlertType(status);
+        setOpen(true);
     }
 
     function addItem(noteText) {
@@ -74,8 +75,6 @@ function Home() {
                 if (response.data.status === "success") {
                     getAllData();
                 }
-
-                setOpen(true);
                 showAlert(response.data.status)
 
             })
