@@ -45,16 +45,20 @@ function Home() {
     );
 
     function getAllData() {
-        const data = axios.get("http://localhost:8081/");
+        const data = axios.get("http://localhost:8081/api");
         data.then(response => {
-            console.log(response);
-            setNotes([...response.data.data])
+            if (response.data.status === "noAuth") {
+                window.location.pathname = response.data.redirect;
+            } else {
+                console.log(response);
+                setNotes([...response.data.data])
+            }
         })
     }
     useEffect(() => {
         setTimeout(() => {
             getAllData()
-        }, 1000)
+        }, 10)
     }, []);
 
     function showAlert(status) {
@@ -68,7 +72,7 @@ function Home() {
         console.log(noteText)
         if (noteText) {
             console.log("posting")
-            const posting = axios.post("http://localhost:8081/", noteText);
+            const posting = axios.post("http://localhost:8081/api", noteText);
             posting.then((response) => {
                 console.log(response);
                 console.log("in here")

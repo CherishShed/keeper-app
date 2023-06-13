@@ -11,16 +11,18 @@ import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
-import axios, { Axios } from 'axios';
+import axios from 'axios';
 import Note from './Note';
 import Skeleton from '@mui/material/Skeleton';
+import ImageList from '@mui/material/ImageList';
+import ImageListItem from '@mui/material/ImageListItem';
+import { Grid, useMediaQuery } from '@mui/material';
 
 const drawerWidth = 240;
 
@@ -82,7 +84,7 @@ export default function ClippedDrawer(props) {
     function deleteItem(event, itemIndex) {
         const itemToDelete = notes[itemIndex]
         console.log(itemToDelete._id);
-        axios.delete(`http://localhost:8081/${itemToDelete._id}`)
+        axios.delete(`http://localhost:8081/api/${itemToDelete._id}`)
             .then((response) => {
                 console.log(response);
                 if (response.data.status === "success") {
@@ -105,8 +107,15 @@ export default function ClippedDrawer(props) {
             setLoading(false);
         }, 1000)
     }, [props.notes])
+
+    const isSmallScreen = useMediaQuery('(max-width:600px)');
+    const isMediumScreen = useMediaQuery('(max-width:900PX)');
+    const isLargeScreen = useMediaQuery('(min-width:1100px)');
+
+    const cols = isSmallScreen ? 1 : (isMediumScreen ? 2 : (isLargeScreen ? 5 : 3));
+
     return (
-        <Box sx={{ display: "flex" }}>
+        <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
             <CssBaseline />
             <AppBar
                 position="fixed"
@@ -184,10 +193,14 @@ export default function ClippedDrawer(props) {
                         <Skeleton variant="rectangular" width="40%" height={100} sx={{ bgcolor: "#eee" }} />
                     </div>
                 }
+
                 {(!loading) &&
-                    <div className="note-container">
-                        {notes.map((item, index,) => <Note key={index} index={index} title={item.title} content={item.content} handleDelete={deleteItem} show={true} />)}
-                    </div>
+                    <ImageList variant="masonry" cols={cols} gap={2} className="note-container">
+                        {notes.map((item, index,) =>
+                            <ImageListItem component={Note} key={index} index={index} title={item.title} content={item.content} handleDelete={deleteItem} show={true} />
+                        )}
+                    </ImageList>
+
                 }
             </Box>
         </Box>
