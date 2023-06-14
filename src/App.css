@@ -89,7 +89,7 @@ background: purple;
 .MuiTabs-indicator{
   background-color: #E5F9DB !important;
   font-size: 50px;
-  width: 10px !important
+  width: 5px !important
 }
 
 .MuiTab-root:not(.Mui-selected):hover{
