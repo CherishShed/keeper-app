@@ -56,9 +56,8 @@ function Home() {
         })
     }
     useEffect(() => {
-        setTimeout(() => {
-            getAllData()
-        }, 10)
+        console.log("first")
+        getAllData()
     }, []);
 
     function showAlert(status) {
@@ -77,6 +76,7 @@ function Home() {
                 console.log(response);
                 console.log("in here")
                 if (response.data.status === "success") {
+                    console.log("second")
                     getAllData();
                 }
                 showAlert(response.data.status)
