@@ -23,7 +23,10 @@ import Skeleton from '@mui/material/Skeleton';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
 import CollectionsBookmarkIcon from '@mui/icons-material/CollectionsBookmark';
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
 import { Grid, useMediaQuery } from '@mui/material';
+
 
 const drawerWidth = 240;
 
@@ -44,7 +47,7 @@ const closedMixin = (theme) => ({
     overflowX: 'hidden',
     width: `calc(${theme.spacing(7)} + 1px)`,
     [theme.breakpoints.up('sm')]: {
-        width: `calc(${theme.spacing(8)} + 1px)`,
+        width: `calc(${theme.spacing(5.5)} + 1px)`,
     },
 });
 
@@ -78,6 +81,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 
 export default function ClippedDrawer(props) {
     // const theme = useTheme();
+    const [value, setValue] = useState(0);
     const [notes, setNotes] = useState([]);
     const [loading, setLoading] = useState(true)
     const [open, setOpen] = useState(false);
@@ -101,6 +105,9 @@ export default function ClippedDrawer(props) {
 
     const handleDrawerClose = () => {
         setOpen(false);
+    };
+    const handleNavChange = (event, newValue) => {
+        setValue(newValue);
     };
     useEffect(() => {
         setTimeout(() => {
@@ -166,7 +173,9 @@ export default function ClippedDrawer(props) {
                 <Box sx={{ overflow: "hidden" }}>
                     {console.log(props.user)}
 
-                    <List>
+                    <Tabs value={value} onChange={handleNavChange}
+                        orientation="vertical"
+                    >
                         {(loading) &&
                             <div>
                                 <Skeleton component="li" />
@@ -177,17 +186,15 @@ export default function ClippedDrawer(props) {
                         }
                         {!(loading) &&
                             [...user.labels].map((label, index) => (
-                                <ListItem key={label._id} disablePadding>
-                                    <ListItemButton>
-                                        <ListItemIcon>
-                                            <CollectionsBookmarkIcon />
-                                        </ListItemIcon>
-                                        <ListItemText primary={label.key} />
-                                    </ListItemButton>
-                                </ListItem>
+                                <Tab key={label._id} disablePadding label={label.key}
+                                    icon={<CollectionsBookmarkIcon />}
+                                    iconPosition='start'
+                                    component="a"
+                                >
+                                </Tab>
                             ))
                         }
-                    </List>
+                    </Tabs>
                     <Divider />
 
                 </Box>
