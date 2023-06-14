@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import "../App.css"
 import { styled, useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import MuiDrawer from '@mui/material/Drawer';
@@ -175,6 +176,7 @@ export default function ClippedDrawer(props) {
 
                     <Tabs value={value} onChange={handleNavChange}
                         orientation="vertical"
+                        indicatorColor='primary'
                     >
                         {(loading) &&
                             <div>
@@ -189,7 +191,7 @@ export default function ClippedDrawer(props) {
                                 <Tab key={label._id} disablePadding label={label.key}
                                     icon={<CollectionsBookmarkIcon />}
                                     iconPosition='start'
-                                    component="a"
+                                    color='secondary'
                                 >
                                 </Tab>
                             ))

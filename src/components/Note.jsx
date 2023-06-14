@@ -15,7 +15,7 @@ function Note(props) {
 
                 {(hover) &&
                     <Zoom in={hover} timeout={300}>
-                        <button style={{ border: "none", color: "orange", position: "absolute", right: "10px", top: "0", background: "transparent", fontSize: "12px" }} onClick={(e) => { props.handleDelete(e, props.index) }}>
+                        <button style={{ border: "none", color: "#83764F", position: "absolute", right: "10px", top: "0", background: "transparent", fontSize: "12px" }} onClick={(e) => { props.handleDelete(e, props.index) }}>
                             <DeleteIcon />
                         </button>
                     </Zoom>

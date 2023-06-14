@@ -9,6 +9,11 @@ body{
   overflow-x:hidden;
 }
 
+:root{
+  --mainColor:"#9BABB8";
+  --secondaryColor:"#EEE3CB"
+}
+
 .note-container{
   padding: 30px;
   min-height: 100%;
@@ -81,6 +86,19 @@ background-color: purple;
 background: purple;
 }
 
+.MuiTabs-indicator{
+  background-color: #E5F9DB !important;
+  font-size: 50px;
+  width: 10px !important
+}
+
+.MuiTab-root:not(.Mui-selected):hover{
+  background-color: hsla(244, 61%, 63%, 0.137) !important;
+}
+.Mui-selected{
+  color: #fff !important;
+  background-color: #83764F !important;
+}
 @media (max-width:600px){
   .note{
     min-width: 100%;
