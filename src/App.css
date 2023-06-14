@@ -19,7 +19,6 @@ body{
 
 }
 .MuiImageList-masonry{
-  background-color: red;
   flex-wrap: wrap;
   /* min-width: 100%; */
   max-width: 100vw;
@@ -72,7 +71,7 @@ textarea{
 }
 footer{
   text-align: center;
-  position: absolute;
+  /* position: absolute; */
   bottom: 0;
   left: 45%;
 }
@@ -80,4 +79,18 @@ footer{
 .MuiBackdrop-root{
 background-color: purple;
 background: purple;
+}
+
+@media (max-width:600px){
+  .note{
+    min-width: 100%;
+  }
+}
+
+@media ((max-width:900px) and (min-width:600px)) {
+  .note {
+    /* background-color: aqua; */
+    max-width: 50%;
+    width: 300px;
+  }
 }

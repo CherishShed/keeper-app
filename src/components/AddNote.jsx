@@ -42,7 +42,7 @@ function AddNote(props) {
             }}
         >
             {(typing) &&
-                <Zoom in={typing} timeout={1200}>
+                <Zoom in={typing} timeout={500}>
                     <TextField
                         type="text"
                         onChange={(e) => setNoteText({ ...noteText, title: e.target.value })}
