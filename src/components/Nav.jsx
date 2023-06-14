@@ -22,6 +22,7 @@ import Note from './Note';
 import Skeleton from '@mui/material/Skeleton';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
+import CollectionsBookmarkIcon from '@mui/icons-material/CollectionsBookmark';
 import { Grid, useMediaQuery } from '@mui/material';
 
 const drawerWidth = 240;
@@ -77,10 +78,10 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 
 export default function ClippedDrawer(props) {
     // const theme = useTheme();
-
     const [notes, setNotes] = useState([]);
     const [loading, setLoading] = useState(true)
     const [open, setOpen] = useState(false);
+    const [user, setUser] = useState({ ...props.user });
     function deleteItem(event, itemIndex) {
         const itemToDelete = notes[itemIndex]
         console.log(itemToDelete._id);
@@ -106,7 +107,14 @@ export default function ClippedDrawer(props) {
             setNotes(props.notes);
             setLoading(false);
         }, 1000)
+        console.log(props)
     }, [props.notes])
+
+    useEffect(() => {
+        setTimeout(() => {
+            setUser({ ...user, ...props.user });
+        }, 100)
+    }, [props.user])
 
     const isSmallScreen = useMediaQuery('(max-width:600px)');
     const isMediumScreen = useMediaQuery('(max-width:900PX)');
@@ -156,31 +164,32 @@ export default function ClippedDrawer(props) {
             <Drawer variant="permanent" open={open}>
                 <Toolbar />
                 <Box sx={{ overflow: "hidden" }}>
+                    {console.log(props.user)}
+
                     <List>
-                        {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
-                            <ListItem key={text} disablePadding>
-                                <ListItemButton>
-                                    <ListItemIcon>
-                                        {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                                    </ListItemIcon>
-                                    <ListItemText primary={text} />
-                                </ListItemButton>
-                            </ListItem>
-                        ))}
+                        {(loading) &&
+                            <div>
+                                <Skeleton component="li" />
+                                <Skeleton component="li" />
+                                <Skeleton component="li" />
+                                <Skeleton component="li" />
+                            </div>
+                        }
+                        {!(loading) &&
+                            [...user.labels].map((label, index) => (
+                                <ListItem key={label._id} disablePadding>
+                                    <ListItemButton>
+                                        <ListItemIcon>
+                                            <CollectionsBookmarkIcon />
+                                        </ListItemIcon>
+                                        <ListItemText primary={label.key} />
+                                    </ListItemButton>
+                                </ListItem>
+                            ))
+                        }
                     </List>
                     <Divider />
-                    <List>
-                        {["All mail", "Trash", "Spam"].map((text, index) => (
-                            <ListItem key={text} disablePadding>
-                                <ListItemButton>
-                                    <ListItemIcon>
-                                        {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                                    </ListItemIcon>
-                                    <ListItemText primary={text} />
-                                </ListItemButton>
-                            </ListItem>
-                        ))}
-                    </List>
+
                 </Box>
             </Drawer>
             <Box component="main" sx={{ flexGrow: 1, p: 3 }}>

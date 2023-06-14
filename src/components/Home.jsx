@@ -20,6 +20,7 @@ function Home() {
     const [open, setOpen] = useState(false);
     const [snackText, setSnackText] = useState("")
     const [alertType, setAlertType] = useState("")
+    const [user, setUser] = useState({});
     const Alert = React.forwardRef(function Alert(props, ref) {
         return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
     });
@@ -50,14 +51,29 @@ function Home() {
             if (response.data.status === "noAuth") {
                 window.location.pathname = response.data.redirect;
             } else {
+                getUserData()
                 console.log(response);
                 setNotes([...response.data.data])
             }
         })
     }
+
+    function getUserData() {
+        const data = axios.get("http://localhost:8081/api/getUser");
+        data.then(response => {
+            if (response.data.status === "error") {
+                window.location.pathname = response.data.redirect;
+            } else {
+                console.log(response);
+                setUser({ ...response.data.data });
+            }
+        })
+    }
+
     useEffect(() => {
         console.log("first")
         getAllData()
+        console.log(user);
     }, []);
 
     function showAlert(status) {
@@ -67,7 +83,7 @@ function Home() {
     }
 
     function addItem(noteText) {
-        console.log("creating")
+        console.log("creatig")
         console.log(noteText)
         if (noteText) {
             console.log("posting")
@@ -89,7 +105,7 @@ function Home() {
         <div style={{ backgroundColor: "#EEE3CB", minHeight: "100vh" }}>
 
             <AddNote handleSubmit={addItem} />
-            <TemporaryDrawer notes={notes} showAlert={showAlert} />
+            <TemporaryDrawer notes={notes} showAlert={showAlert} user={user} />
             <div>
                 <Snackbar
                     open={open}
