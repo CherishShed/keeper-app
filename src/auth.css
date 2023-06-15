@@ -1,6 +1,5 @@
 *{
     box-sizing: border-box;
-    font-family: "Quicksand";
 }
 body{
     margin: 0;
@@ -74,4 +73,8 @@ body{
     min-width: 300px;
     top: 10%;
     left: 12%
+}
+input{
+font-family:"Indie Flower" !important;
+font-weight: bold !important;
 }

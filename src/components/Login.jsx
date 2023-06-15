@@ -1,10 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import "../auth.css"
 import { Box, Button, InputAdornment, TextField, Typography } from '@mui/material';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import EnhancedEncryptionIcon from '@mui/icons-material/EnhancedEncryption';
+import { IconButton } from '@mui/material';
+import { VisibilityOffOutlined, VisibilityOutlined } from "@mui/icons-material"
 function Login() {
+    const [showPassword, setShowPassword] = useState(false);
+
+    const handleClickShowPassword = () => setShowPassword((show) => !show);
+
+    const handleMouseDownPassword = (event) => {
+        event.preventDefault();
+    };
+
+
     return (
 
         <div className="loginForm">
@@ -16,8 +27,20 @@ function Login() {
                         <img alt="logo" src="Screenshot_2023-06-15_113137-removebg-preview.png" className='logo' />
                         <p>Welcome To Your Note Assistant</p>
                     </div>
-                    <TextField variant='standard' label="Email" type='email' color='warning' required InputProps={{ startAdornment: <InputAdornment position="start"><AccountCircleIcon /></InputAdornment> }} />
-                    <TextField variant='standard' label="Password" type='password' color="warning" required InputProps={{ startAdornment: <InputAdornment position="start"><EnhancedEncryptionIcon /></InputAdornment> }} />
+                    <TextField variant='standard' label="Email" type='email' color='warning' required InputProps={{ startAdornment: <InputAdornment position="start"><AccountCircleIcon /></InputAdornment> }} className='form-input-field' />
+                    <TextField variant='standard' label="Password" type={showPassword ? 'text' : "password"} color="warning" required InputProps={{
+                        startAdornment: <InputAdornment position="start"><EnhancedEncryptionIcon /></InputAdornment>, endAdornment:
+                            <InputAdornment position="end" >
+                                <IconButton
+                                    aria-label="toggle password visibility"
+                                    onClick={handleClickShowPassword}
+                                    onMouseDown={handleMouseDownPassword}
+                                    edge="end"
+                                >
+                                    {showPassword ? <VisibilityOffOutlined /> : <VisibilityOutlined />}
+                                </IconButton>
+                            </InputAdornment>
+                    }} className='form-input-field' />
                     <p className='signup-text'>Don't have an account? <a className='signup-link' href="/">Sign Up</a></p>
                     <Button className='loginButton' type="submit" variant='contained' size='large'>Login</Button>
 
