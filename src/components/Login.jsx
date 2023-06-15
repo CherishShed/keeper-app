@@ -8,13 +8,34 @@ import { IconButton } from '@mui/material';
 import { VisibilityOffOutlined, VisibilityOutlined } from "@mui/icons-material"
 function Login() {
     const [showPassword, setShowPassword] = useState(false);
-
+    const [password, setPassword] = useState("");
     const handleClickShowPassword = () => setShowPassword((show) => !show);
 
     const handleMouseDownPassword = (event) => {
         event.preventDefault();
     };
 
+    function handleButton(ev) {
+        const passLength = password.length;
+        const offset = ev.target.offsetLeft;
+        console.log(passLength, offset)
+        let displace = "0px";
+        if (passLength < 8) {
+            if (offset <= 98) {
+                displace = "100px";
+            } else if (offset > 96) {
+                displace = "-100px";
+            }
+        } else {
+            ev.target.setAttribute("disabled", false)
+            ev.target.style.background = "green"
+        }
+        ev.target.style.left = displace;
+    }
+    function handleButtonLeave(ev) {
+        ev.target.setAttribute("disabled", false);
+        ev.target.style.left = "0px";
+    }
 
     return (
 
@@ -28,7 +49,10 @@ function Login() {
                         <p>Welcome To Your Note Assistant</p>
                     </div>
                     <TextField variant='standard' label="Email" type='email' color='warning' required InputProps={{ startAdornment: <InputAdornment position="start"><AccountCircleIcon /></InputAdornment> }} className='form-input-field' />
-                    <TextField variant='standard' label="Password" type={showPassword ? 'text' : "password"} color="warning" required InputProps={{
+                    <TextField onChange={(e) => {
+                        document.querySelector(".loginButton").style.left = "0px";
+                        setPassword(e.target.value)
+                    }} value={password} variant='standard' label="Password" type={showPassword ? 'text' : "password"} color="warning" required InputProps={{
                         startAdornment: <InputAdornment position="start"><EnhancedEncryptionIcon /></InputAdornment>, endAdornment:
                             <InputAdornment position="end" >
                                 <IconButton
@@ -40,9 +64,9 @@ function Login() {
                                     {showPassword ? <VisibilityOffOutlined /> : <VisibilityOutlined />}
                                 </IconButton>
                             </InputAdornment>
-                    }} className='form-input-field' />
+                    }} className='form-input-field password' />
                     <p className='signup-text'>Don't have an account? <a className='signup-link' href="/">Sign Up</a></p>
-                    <Button className='loginButton' type="submit" variant='contained' size='large'>Login</Button>
+                    <Button className='loginButton' type="submit" variant='contained' size='large' onMouseEnter={(e) => handleButton(e)} onMouseLeave={(e) => { handleButtonLeave(e) }}>Login</Button>
 
                 </Box>
             </div>
