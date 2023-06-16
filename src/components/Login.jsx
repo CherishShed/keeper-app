@@ -27,14 +27,10 @@ function Login() {
                 displace = "-100px";
             }
         } else {
-            ev.target.setAttribute("disabled", false)
+            // ev.target.setAttribute("disabled", false)
             ev.target.style.background = "green"
         }
         ev.target.style.left = displace;
-    }
-    function handleButtonLeave(ev) {
-        ev.target.setAttribute("disabled", false);
-        ev.target.style.left = "0px";
     }
 
     return (
@@ -66,7 +62,7 @@ function Login() {
                             </InputAdornment>
                     }} className='form-input-field password' />
                     <p className='signup-text'>Don't have an account? <a className='signup-link' href="/">Sign Up</a></p>
-                    <Button className='loginButton' type="submit" variant='contained' size='large' onMouseEnter={(e) => handleButton(e)} onMouseLeave={(e) => { handleButtonLeave(e) }}>Login</Button>
+                    <Button className='loginButton' type="submit" variant='contained' size='large' onMouseEnter={(e) => handleButton(e)}>Login</Button>
 
                 </Box>
             </div>
