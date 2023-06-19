@@ -77,17 +77,21 @@ function Home() {
         console.log(noteText)
         if (noteText) {
             console.log("posting")
-            const posting = axios.post("http://localhost:8081/api", noteText);
-            posting.then((response) => {
-                console.log(response);
-                console.log("in here")
-                if (response.data.status === "success") {
-                    console.log("second")
-                    getUserData();
-                }
-                showAlert(response.data.status)
+            axios.post("http://localhost:8081/api", noteText, { headers: { Authorization: localStorage.getItem("token") } })
+                .then((response) => {
+                    console.log(response);
+                    console.log("in here")
+                    if (response.data.status === "success") {
+                        console.log("second")
+                        getUserData();
+                    }
+                    showAlert(response.data.status)
 
-            })
+                }).catch((err) => {
+                    if (err.response.data === "Unauthorized") {
+                        window.location.pathname = "/login";
+                    }
+                })
         }
     }
 
