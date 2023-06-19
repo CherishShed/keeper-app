@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import "../auth.css"
-import { Box, Button, InputAdornment, TextField, Typography } from '@mui/material';
+import { Box, Button, FormControl, InputAdornment, TextField, Typography } from '@mui/material';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import EnhancedEncryptionIcon from '@mui/icons-material/EnhancedEncryption';
 import { IconButton } from '@mui/material';
 import { VisibilityOffOutlined, VisibilityOutlined } from "@mui/icons-material"
+import axios from 'axios';
 function Login() {
     const [showPassword, setShowPassword] = useState(false);
     const [formData, setFormData] = useState({ username: "", password: "" });
@@ -35,18 +36,28 @@ function Login() {
         }
         ev.target.style.left = displace;
     }
+
+    function handleSubmit(event) {
+        event.preventDefault();
+        axios.post("http://localhost:8081/login", formData)
+            .then((result) => {
+                console.log(result);
+            })
+    }
     return (
 
         <div className="loginForm">
             <div className='login'>
                 <img src="pexels-mockupbee-12039670.jpg" className='backImg' alt="back img" />
                 <img src="Screenshot_2023-06-15_114647-removebg-preview.png" alt="welcome" className='welcome-img' />
-                <Box component="form" className="formInput" display="flex" flexDirection="column" gap={2}>
+                <FormControl className="formInput" gap={2}
+                    onSubmit={handleSubmit}
+                >
                     <div>
                         <img alt="logo" src="Screenshot_2023-06-15_113137-removebg-preview.png" className='logo' />
                         <p>Welcome To Your Note Assistant</p>
                     </div>
-                    <TextField helperText={helpText} variant='standard' label="Email" type='email' color='warning' required InputProps={{ startAdornment: <InputAdornment position="start"><AccountCircleIcon /></InputAdornment> }} className='form-input-field'
+                    <TextField fullWidth helperText={helpText} variant='standard' label="Email" type='email' color='warning' name='username' required InputProps={{ startAdornment: <InputAdornment position="start"><AccountCircleIcon /></InputAdornment> }} className='form-input-field'
                         onChange={(e) => {
                             document.querySelector(".loginButton").style.left = "0px";
                             document.querySelector(".loginButton").removeAttribute("disabled");
@@ -55,7 +66,7 @@ function Login() {
                         value={formData.username}
                         key={1}
                     />
-                    <TextField key={2} helperText={helpText} onChange={(e) => {
+                    <TextField key={2} name='password' helperText={helpText} onChange={(e) => {
                         document.querySelector(".loginButton").style.left = "0px";
                         document.querySelector(".loginButton").removeAttribute("disabled");
                         setFormData({ ...formData, password: e.target.value })
@@ -75,7 +86,7 @@ function Login() {
                     <p className='signup-text'>Don't have an account? <a className='signup-link' href="/">Sign Up</a></p>
                     <Button className='loginButton' type="submit" variant='contained' size='large' onMouseEnter={(e) => handleButton(e)}>Login</Button>
 
-                </Box>
+                </FormControl>
             </div>
         </div>
 
