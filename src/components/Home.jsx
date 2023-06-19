@@ -46,6 +46,22 @@ function Home() {
     );
 
     function getAllData() {
+        axios.get("http://localhost:8081/", { headers: { Authorization: localStorage.getItem("token") } })
+            .then(response => {
+                console.log(response)
+                if (response.data.status === "noAuth") {
+                    window.location.pathname = response.data.redirect;
+                } else {
+                    getUserData()
+                    console.log(response);
+                    setNotes([...response.data.data])
+                }
+            })
+            .catch((err) => {
+                if (err.response.data === "Unauthorized") {
+                    window.location.pathname = "/login";
+                }
+            })
         const data = axios.get("http://localhost:8081/api");
         data.then(response => {
             if (response.data.status === "noAuth") {

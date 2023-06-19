@@ -69,6 +69,7 @@ function Login() {
                 console.log(result);
                 if (result.data.success) {
                     localStorage.setItem("token", result.data.token)
+                    window.location.pathname = "/"
                 }
                 settoastText(result.data.message)
 
