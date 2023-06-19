@@ -38,10 +38,16 @@ function Login() {
     }
 
     function handleSubmit(event) {
+        console.log("here")
         event.preventDefault();
         axios.post("http://localhost:8081/login", formData)
             .then((result) => {
                 console.log(result);
+                if (result.data.success) {
+                    localStorage.setItem("token", result.data.token)
+                } else {
+                    setHelpText(result.data.message)
+                }
             })
     }
     return (
@@ -50,7 +56,7 @@ function Login() {
             <div className='login'>
                 <img src="pexels-mockupbee-12039670.jpg" className='backImg' alt="back img" />
                 <img src="Screenshot_2023-06-15_114647-removebg-preview.png" alt="welcome" className='welcome-img' />
-                <FormControl className="formInput" gap={2}
+                <FormControl component="form" className="formInput" gap={2}
                     onSubmit={handleSubmit}
                 >
                     <div>
