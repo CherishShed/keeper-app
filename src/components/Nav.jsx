@@ -176,7 +176,7 @@ export default function ClippedDrawer(props) {
 
                     <Tabs value={value} onChange={handleNavChange}
                         orientation="vertical"
-                        indicatorColor='primary'
+
                     >
                         {(loading) &&
                             <div>
@@ -188,10 +188,12 @@ export default function ClippedDrawer(props) {
                         }
                         {!(loading) &&
                             [...user.labels].map((label, index) => (
-                                <Tab key={label._id} disablePadding label={label.key}
+                                <Tab key={label._id}
+                                    label={label.key}
                                     icon={<CollectionsBookmarkIcon />}
                                     iconPosition='start'
                                     color='secondary'
+
                                 >
                                 </Tab>
                             ))
