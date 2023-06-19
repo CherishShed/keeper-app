@@ -42,14 +42,14 @@ body{
     top: 20%;
     min-height: 70%;
     justify-content: center;
-    border: 2px solid purple;
+    /* border: 2px solid purple; */
     transition: all 3s;
     
 }
 
 .loginButton{
     margin-top: 20px !important;
-    background-color:green !important;
+    background-color:rgb(81, 110, 81) !important;
     color: black !important;
     width: 200px !important;
     align-self: center;
