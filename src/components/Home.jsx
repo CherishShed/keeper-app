@@ -45,50 +45,24 @@ function Home() {
         </React.Fragment>
     );
 
-    function getAllData() {
+    function getUserData() {
         axios.get("http://localhost:8081/", { headers: { Authorization: localStorage.getItem("token") } })
             .then(response => {
                 console.log(response)
-                if (response.data.status === "noAuth") {
-                    window.location.pathname = response.data.redirect;
-                } else {
-                    getUserData()
-                    console.log(response);
-                    setNotes([...response.data.data])
-                }
+                setUser({ ...response.data.user })
+                setNotes([...response.data.user.notes])
+
             })
             .catch((err) => {
                 if (err.response.data === "Unauthorized") {
                     window.location.pathname = "/login";
                 }
             })
-        const data = axios.get("http://localhost:8081/api");
-        data.then(response => {
-            if (response.data.status === "noAuth") {
-                window.location.pathname = response.data.redirect;
-            } else {
-                getUserData()
-                console.log(response);
-                setNotes([...response.data.data])
-            }
-        })
-    }
-
-    function getUserData() {
-        const data = axios.get("http://localhost:8081/api/getUser");
-        data.then(response => {
-            if (response.data.status === "error") {
-                window.location.pathname = response.data.redirect;
-            } else {
-                console.log(response);
-                setUser({ ...response.data.data });
-            }
-        })
     }
 
     useEffect(() => {
         console.log("first")
-        getAllData()
+        getUserData()
         console.log(user);
     }, []);
 
@@ -109,7 +83,7 @@ function Home() {
                 console.log("in here")
                 if (response.data.status === "success") {
                     console.log("second")
-                    getAllData();
+                    getUserData();
                 }
                 showAlert(response.data.status)
 
