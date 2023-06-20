@@ -168,7 +168,7 @@ export default function ClippedDrawer(props) {
                                 <MenuIcon />
                             </IconButton>
                             <Typography variant="h6" noWrap component="div">
-                                ShediKeep
+                                <img alt="logo" src="Screenshot_2023-06-15_113137-removebg-preview.png" className='logo' />
                             </Typography>
                         </Toolbar>
                     </AppBar>
