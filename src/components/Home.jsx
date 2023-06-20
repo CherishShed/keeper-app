@@ -21,6 +21,7 @@ function Home() {
     const [snackText, setSnackText] = useState("")
     const [alertType, setAlertType] = useState("")
     const [user, setUser] = useState({});
+    const [loading, setLoading] = useState(true);
     const Alert = React.forwardRef(function Alert(props, ref) {
         return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
     });
@@ -51,6 +52,7 @@ function Home() {
                 console.log(response)
                 setUser({ ...response.data.user })
                 setNotes([...response.data.user.notes])
+                setLoading(false);
 
             })
             .catch((err) => {
@@ -62,7 +64,9 @@ function Home() {
 
     useEffect(() => {
         console.log("first")
-        getUserData()
+        setTimeout(() => {
+            getUserData()
+        }, 1000)
         console.log(user);
     }, []);
 
@@ -95,33 +99,43 @@ function Home() {
         }
     }
     const getLabel = (e) => {
+        setLoading(true);
         axios.get(`http://localhost:8081/api/label/${e.target.textContent}`, { headers: { Authorization: localStorage.getItem("token") } })
             .then((result) => {
                 console.log(result.data.data.value);
                 setNotes(result.data.data.value);
+                setLoading(false)
             })
             .catch((err) => {
                 console.log(err);
+                setLoading(false);
             })
     }
     return (
         <div style={{ backgroundColor: "#EEE3CB", minHeight: "100vh" }}>
+            {(loading) &&
+                <lottie-player src="https://assets1.lottiefiles.com/packages/lf20_n7QLgwDWpF.json" mode="bounce" background="transparent" speed="1" style={{ width: "500px", height: "500px", margin: "0 auto" }} loop autoplay></lottie-player>
 
-            <AddNote handleSubmit={addItem} />
-            <TemporaryDrawer notes={notes} showAlert={showAlert} user={user} getLabel={getLabel} />
-            <div>
-                <Snackbar
-                    open={open}
-                    autoHideDuration={6000}
-                    onClose={handleClose}
-                    action={action}
+            }
+            {!(loading) &&
+                <div>
+                    <AddNote handleSubmit={addItem} />
+                    <TemporaryDrawer notes={notes} showAlert={showAlert} user={user} getLabel={getLabel} />
+                    <div>
+                        <Snackbar
+                            open={open}
+                            autoHideDuration={6000}
+                            onClose={handleClose}
+                            action={action}
 
-                ><Alert onClose={handleClose} severity={alertType} sx={{ width: '100%' }}>
-                        {snackText}
-                    </Alert></Snackbar>
-            </div>
-            <Footer />
-        </div>
+                        ><Alert onClose={handleClose} severity={alertType} sx={{ width: '100%' }}>
+                                {snackText}
+                            </Alert></Snackbar>
+                    </div>
+                    <Footer />
+                </div>
+            }
+        </div >
     );
 }
 

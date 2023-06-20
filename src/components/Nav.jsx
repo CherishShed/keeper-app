@@ -131,99 +131,96 @@ export default function ClippedDrawer(props) {
     const cols = isSmallScreen ? 1 : (isMediumScreen ? 2 : (isLargeScreen ? 5 : 3));
 
     return (
-        <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-            <CssBaseline />
-            <AppBar
-                position="fixed"
-                sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}
-                open={open}
-                style={{ backgroundColor: "#9BABB8" }}
-            >
-                <Toolbar>
-                    <IconButton
-                        onClick={handleDrawerClose}
-                        color="inherit"
-                        aria-label="close drawer"
-                        edge="start"
-                        sx={{
-                            marginRight: 5,
-                            ...(!open && { display: "none" })
-                        }}
+        <div>
+            {
+                !(loading) &&
+                <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                    <CssBaseline />
+                    <AppBar
+                        position="fixed"
+                        sx={{ zIndex: (theme) => theme.zIndex.drawer + 1 }}
+                        open={open}
+                        style={{ backgroundColor: "#9BABB8" }}
                     >
-                        <ChevronLeftIcon />
-                    </IconButton>
-                    <IconButton
-                        color="inherit"
-                        aria-label="open drawer"
-                        onClick={handleDrawerOpen}
-                        edge="start"
-                        sx={{
-                            marginRight: 5,
-                            ...(open && { display: "none" })
-                        }}
-                    >
-                        <MenuIcon />
-                    </IconButton>
-                    <Typography variant="h6" noWrap component="div">
-                        ShediKeep
-                    </Typography>
-                </Toolbar>
-            </AppBar>
-            <Drawer variant="permanent" open={open}>
-                <Toolbar />
-                <Box sx={{ overflow: "hidden" }}>
-                    {/* {console.log(props.user)} */}
+                        <Toolbar>
+                            <IconButton
+                                onClick={handleDrawerClose}
+                                color="inherit"
+                                aria-label="close drawer"
+                                edge="start"
+                                sx={{
+                                    marginRight: 5,
+                                    ...(!open && { display: "none" })
+                                }}
+                            >
+                                <ChevronLeftIcon />
+                            </IconButton>
+                            <IconButton
+                                color="inherit"
+                                aria-label="open drawer"
+                                onClick={handleDrawerOpen}
+                                edge="start"
+                                sx={{
+                                    marginRight: 5,
+                                    ...(open && { display: "none" })
+                                }}
+                            >
+                                <MenuIcon />
+                            </IconButton>
+                            <Typography variant="h6" noWrap component="div">
+                                ShediKeep
+                            </Typography>
+                        </Toolbar>
+                    </AppBar>
+                    <Drawer variant="permanent" open={open}>
+                        <Toolbar />
+                        <Box sx={{ overflow: "hidden" }}>
+                            {/* {console.log(props.user)} */}
 
-                    <Tabs value={value} onChange={handleNavChange}
-                        orientation="vertical"
+                            <Tabs value={value} onChange={handleNavChange}
+                                orientation="vertical"
 
-                    >
-                        {(loading) &&
-                            <div>
-                                <Skeleton component="li" />
-                                <Skeleton component="li" />
-                                <Skeleton component="li" />
-                                <Skeleton component="li" />
-                            </div>
+                            >
+                                {(loading) &&
+                                    <div>
+                                        <Skeleton component="li" />
+                                        <Skeleton component="li" />
+                                        <Skeleton component="li" />
+                                        <Skeleton component="li" />
+                                    </div>
+                                }
+                                {!(loading) &&
+                                    [...user.labels].map((label, index) => (
+                                        <Tab key={label._id}
+                                            label={label.key}
+                                            onClick={(e) => props.getLabel(e)}
+                                            icon={<CollectionsBookmarkIcon style={{ width: "50px" }} />}
+                                            iconPosition='start'
+                                            color='secondary'
+
+                                        >
+                                        </Tab>
+                                    ))
+                                }
+                            </Tabs>
+                            <Divider />
+
+                        </Box>
+                    </Drawer>
+                    <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+                        <Toolbar />
+                        {(!loading) &&
+                            <ImageList variant="masonry" cols={cols} gap={2} className="note-container">
+                                {notes.map((item, index,) =>
+                                    <ImageListItem component={Note} key={index} index={index} title={item.title} content={item.content} handleDelete={deleteItem} show={true} />
+                                )}
+                            </ImageList>
+
                         }
-                        {!(loading) &&
-                            [...user.labels].map((label, index) => (
-                                <Tab key={label._id}
-                                    label={label.key}
-                                    onClick={(e) => props.getLabel(e)}
-                                    icon={<CollectionsBookmarkIcon style={{ width: "50px" }} />}
-                                    iconPosition='start'
-                                    color='secondary'
-
-                                >
-                                </Tab>
-                            ))
-                        }
-                    </Tabs>
-                    <Divider />
-
+                    </Box>
                 </Box>
-            </Drawer>
-            <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-                <Toolbar />
-                {(loading) &&
-                    <div style={{ display: "flex", flexDirection: "row", gap: "50px", flexWrap: "wrap" }}>
-                        <Skeleton variant="rectangular" width="40%" height={100} sx={{ bgcolor: "#eee" }} />
-                        <Skeleton variant="rectangular" width="40%" height={100} sx={{ bgcolor: "#eee" }} />
-                        <Skeleton variant="rectangular" width="40%" height={100} sx={{ bgcolor: "#eee" }} />
-                        <Skeleton variant="rectangular" width="40%" height={100} sx={{ bgcolor: "#eee" }} />
-                    </div>
-                }
+            }
 
-                {(!loading) &&
-                    <ImageList variant="masonry" cols={cols} gap={2} className="note-container">
-                        {notes.map((item, index,) =>
-                            <ImageListItem component={Note} key={index} index={index} title={item.title} content={item.content} handleDelete={deleteItem} show={true} />
-                        )}
-                    </ImageList>
-
-                }
-            </Box>
-        </Box>
+        </div >
     );
 }
