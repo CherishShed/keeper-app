@@ -14,7 +14,7 @@ function Note(props) {
                 <p className="note-text" style={{ height: "50%", maxHeight: "90%", minHeight: "fit-content" }}>{props.content}</p>
 
                 {(hover) &&
-                    <Zoom in={hover} timeout={300}>
+                    <Zoom in={hover} timeout={100}>
                         <button style={{ border: "none", color: "#83764F", position: "absolute", right: "10px", top: "0", background: "transparent", fontSize: "12px" }} onClick={(e) => { props.handleDelete(e, props.index) }}>
                             <DeleteIcon />
                         </button>
