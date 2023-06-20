@@ -107,8 +107,11 @@ function Login() {
                             key={1}
                         />
                         <TextField key={2} name='password' helperText={helpText} onChange={(e) => {
-                            document.querySelector(".loginButton").style.left = "0px";
-                            document.querySelector(".loginButton").removeAttribute("disabled");
+                            const elements = document.getElementsByClassName(styles.loginButton);
+                            elements[0].style.left = "0px";
+                            elements[0].removeAttribute("disabled");
+                            console.log(elements)
+                            setFormData({ ...formData, username: e.target.value })
                             setFormData({ ...formData, password: e.target.value })
                         }} value={formData.password} variant='standard' label="Password" type={showPassword ? 'text' : "password"} color="warning" required InputProps={{
                             startAdornment: <InputAdornment position="start"><EnhancedEncryptionIcon /></InputAdornment>, endAdornment:
