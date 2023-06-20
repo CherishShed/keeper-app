@@ -114,7 +114,7 @@ function Home() {
     return (
         <div style={{ backgroundColor: "#EEE3CB", minHeight: "100vh" }}>
             {(loading) &&
-                <lottie-player src="https://assets1.lottiefiles.com/packages/lf20_n7QLgwDWpF.json" mode="bounce" background="transparent" speed="1" style={{ width: "500px", height: "500px", margin: "0 auto" }} loop autoplay></lottie-player>
+                <lottie-player src="https://assets1.lottiefiles.com/packages/lf20_n7QLgwDWpF.json" mode="bounce" background="transparent" speed="1" style={{ width: "60%", height: "70%", margin: "0 auto", minHeight: "400px", minWidth: "300px" }} loop autoplay></lottie-player>
 
             }
             {!(loading) &&
