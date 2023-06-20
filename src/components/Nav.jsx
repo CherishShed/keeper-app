@@ -172,7 +172,7 @@ export default function ClippedDrawer(props) {
             <Drawer variant="permanent" open={open}>
                 <Toolbar />
                 <Box sx={{ overflow: "hidden" }}>
-                    {console.log(props.user)}
+                    {/* {console.log(props.user)} */}
 
                     <Tabs value={value} onChange={handleNavChange}
                         orientation="vertical"
@@ -190,6 +190,7 @@ export default function ClippedDrawer(props) {
                             [...user.labels].map((label, index) => (
                                 <Tab key={label._id}
                                     label={label.key}
+                                    onClick={(e) => props.getLabel(e)}
                                     icon={<CollectionsBookmarkIcon />}
                                     iconPosition='start'
                                     color='secondary'

@@ -94,12 +94,21 @@ function Home() {
                 })
         }
     }
-
+    const getLabel = (e) => {
+        axios.get(`http://localhost:8081/api/label/${e.target.textContent}`, { headers: { Authorization: localStorage.getItem("token") } })
+            .then((result) => {
+                console.log(result.data.data.value);
+                setNotes(result.data.data.value);
+            })
+            .catch((err) => {
+                console.log(err);
+            })
+    }
     return (
         <div style={{ backgroundColor: "#EEE3CB", minHeight: "100vh" }}>
 
             <AddNote handleSubmit={addItem} />
-            <TemporaryDrawer notes={notes} showAlert={showAlert} user={user} />
+            <TemporaryDrawer notes={notes} showAlert={showAlert} user={user} getLabel={getLabel} />
             <div>
                 <Snackbar
                     open={open}
