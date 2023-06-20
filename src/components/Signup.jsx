@@ -57,7 +57,6 @@ function Login() {
             ev.target.setAttribute("disabled", true)
         } else {
             ev.target.removeAttribute("disabled")
-            ev.target.style.backgroundColor = "green"
             settextColor("green")
         }
         ev.target.style.left = displace;
@@ -98,8 +97,10 @@ function Login() {
 
                             helperText={helpText} variant='standard' label="Email" type='email' color='warning' name='username' required InputProps={{ startAdornment: <InputAdornment position="start"><AccountCircleIcon /></InputAdornment> }} className={styles["form-input-field"]}
                             onChange={(e) => {
-                                document.querySelector(".loginButton").style.left = "0px";
-                                document.querySelector(".loginButton").removeAttribute("disabled");
+                                const elements = document.getElementsByClassName(styles.loginButton);
+                                elements[0].style.left = "0px";
+                                elements[0].removeAttribute("disabled");
+                                console.log(elements)
                                 setFormData({ ...formData, username: e.target.value })
                             }}
                             value={formData.username}
