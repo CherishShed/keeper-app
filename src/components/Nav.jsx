@@ -191,7 +191,7 @@ export default function ClippedDrawer(props) {
                                 <Tab key={label._id}
                                     label={label.key}
                                     onClick={(e) => props.getLabel(e)}
-                                    icon={<CollectionsBookmarkIcon />}
+                                    icon={<CollectionsBookmarkIcon style={{ width: "50px" }} />}
                                     iconPosition='start'
                                     color='secondary'
 
