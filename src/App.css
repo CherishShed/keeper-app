@@ -13,7 +13,14 @@ body{
   --mainColor:"#9BABB8";
   --secondaryColor:"#EEE3CB"
 }
-
+.logo {
+  width: 150px
+}
+.profilePic{
+  width: 100px;
+  height: 60px;
+  border-radius: 50%;
+}
 .note-container{
   padding: 30px;
   min-height: 100%;

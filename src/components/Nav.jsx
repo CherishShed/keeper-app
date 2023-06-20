@@ -26,7 +26,7 @@ import ImageListItem from '@mui/material/ImageListItem';
 import CollectionsBookmarkIcon from '@mui/icons-material/CollectionsBookmark';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
-import { Grid, useMediaQuery } from '@mui/material';
+import { Grid, TextField, useMediaQuery } from '@mui/material';
 
 
 const drawerWidth = 240;
@@ -142,7 +142,7 @@ export default function ClippedDrawer(props) {
                         open={open}
                         style={{ backgroundColor: "#9BABB8" }}
                     >
-                        <Toolbar>
+                        <Toolbar style={{ position: "relative" }}>
                             <IconButton
                                 onClick={handleDrawerClose}
                                 color="inherit"
@@ -170,6 +170,12 @@ export default function ClippedDrawer(props) {
                             <Typography variant="h6" noWrap component="div">
                                 <img alt="logo" src="Screenshot_2023-06-15_113137-removebg-preview.png" className='logo' />
                             </Typography>
+                            <TextField variant='filled' placeholder='Search' style={{ backgroundColor: "white", width: "450px", margin: "0 auto" }} />
+                            <Typography variant="h6" noWrap component="div" style={{ position: "absolute", right: "20px", }}>
+                                {/* data:image/png;base64, */}
+                                <img alt="logo" src="pexels-anna-nekrashevich-8534163.jpg" className='profilePic' />
+                            </Typography>
+
                         </Toolbar>
                     </AppBar>
                     <Drawer variant="permanent" open={open}>
