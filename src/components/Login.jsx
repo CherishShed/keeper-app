@@ -117,7 +117,7 @@ function Login() {
                                     </IconButton>
                                 </InputAdornment>
                         }} className='form-input-field password' />
-                        <p className='signup-text'>Don't have an account? <a className='signup-link' href="/">Sign Up</a></p>
+                        <p className='signup-text'>Don't have an account? <a className='signup-link' href="/register">Sign Up</a></p>
                         <Button className='loginButton' type="submit" variant='contained' size='large' onMouseEnter={(e) => handleButton(e)}>Login</Button>
 
                     </FormControl>

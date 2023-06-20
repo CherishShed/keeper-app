@@ -122,8 +122,8 @@ function Login() {
                                     </IconButton>
                                 </InputAdornment>
                         }} className={styles['form-input-field password']} />
-                        <p className={styles['signup-text']}>Don't have an account? <a className={styles['signup-link']} href="/">Sign Up</a></p>
-                        <Button className={styles['loginButton']} type="submit" variant='contained' size='large' onMouseEnter={(e) => handleButton(e)}>Login</Button>
+                        <p className={styles['signup-text']}>Don't have an account? <a className={styles['signup-link']} href="/login">Login</a></p>
+                        <Button className={styles['loginButton']} type="submit" variant='contained' size='large' onMouseEnter={(e) => handleButton(e)}>Sign Up</Button>
 
                     </FormControl>
                 </div>

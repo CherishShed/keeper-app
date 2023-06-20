@@ -56,7 +56,7 @@ body{
     width: 150px !important;
     align-self: center;
     position: relative;
-    transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out !important;
     /* transform: translateX(30px); */
 }
 .signup-text{
