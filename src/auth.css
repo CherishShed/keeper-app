@@ -56,7 +56,7 @@ body{
     width: 150px !important;
     align-self: center;
     position: relative;
-    transition: all 2s ease-in-out;
+    transition: all 0.3s ease-in-out;
     /* transform: translateX(30px); */
 }
 .signup-text{
@@ -87,7 +87,7 @@ input{
 font-family:"Indie Flower" !important;
 font-weight: bold !important;
 }
-@media (max-width:900px) {
+@media (max-width:00px) {
     .backImg {
         position: relative !important;
         min-width: 700px !important;

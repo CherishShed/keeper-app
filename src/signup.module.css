@@ -41,7 +41,7 @@ body {
 
 .formInput {
     position: absolute !important;
-    width: 350px !important;
+    width: 400px !important;
     min-width: 300px !important;
     z-index: 6 !important;
     top: 20% !important;
@@ -53,12 +53,12 @@ body {
 
 .loginButton {
     margin-top: 20px !important;
-    background-color: rgb(145, 104, 17) !important;
+    background-color: rgb(121, 89, 59) !important;
     color: black !important;
     width: 150px !important;
     align-self: center;
     position: relative;
-    transition: all 2s ease-in-out;
+    transition: all 0.3s ease-in-out;
     /* transform: translateX(30px); */
 }
 

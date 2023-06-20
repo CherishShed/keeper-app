@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
-import "../signup.css"
+import styles from "../signup.module.css"
 import { Box, Button, FormControl, InputAdornment, TextField, Typography } from '@mui/material';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import EnhancedEncryptionIcon from '@mui/icons-material/EnhancedEncryption';
@@ -83,20 +83,20 @@ function Login() {
     return (
         <div>
             <ToastContainer />
-            <div className="loginForm">
-                <div className='login'>
-                    <img src="pexels-pixabay-531844.jpg" className='signup-backImg' alt="back img" />
-                    <FormControl component="form" className="formInput" gap={2}
+            <div className={styles.loginForm}>
+                <div className={styles.login}>
+                    <img src="pexels-pixabay-531844.jpg" className={styles["signup-backImg"]} alt="back img" />
+                    <FormControl component="form" className={styles["formInput"]} gap={2}
                         onSubmit={handleSubmit}
                     >
                         <div>
-                            <img alt="logo" src="Screenshot_2023-06-15_113137-removebg-preview.png" className='logo' />
+                            <img alt="logo" src="Screenshot_2023-06-15_113137-removebg-preview.png" className={styles.logo} />
                             <p style={{ fontFamily: "Indie Flower", fontSize: "20px" }}>Welcome To Your Note Assistant</p>
                             <p style={{ fontFamily: "Indie Flower", fontSize: "12px", color: { textColor } }}>*Password must be 8+ characters</p>
                         </div>
                         <TextField fullWidth
 
-                            helperText={helpText} variant='standard' label="Email" type='email' color='warning' name='username' required InputProps={{ startAdornment: <InputAdornment position="start"><AccountCircleIcon /></InputAdornment> }} className='form-input-field'
+                            helperText={helpText} variant='standard' label="Email" type='email' color='warning' name='username' required InputProps={{ startAdornment: <InputAdornment position="start"><AccountCircleIcon /></InputAdornment> }} className={styles["form-input-field"]}
                             onChange={(e) => {
                                 document.querySelector(".loginButton").style.left = "0px";
                                 document.querySelector(".loginButton").removeAttribute("disabled");
@@ -121,9 +121,9 @@ function Login() {
                                         {showPassword ? <VisibilityOffOutlined /> : <VisibilityOutlined />}
                                     </IconButton>
                                 </InputAdornment>
-                        }} className='form-input-field password' />
-                        <p className='signup-text'>Don't have an account? <a className='signup-link' href="/">Sign Up</a></p>
-                        <Button className='loginButton' type="submit" variant='contained' size='large' onMouseEnter={(e) => handleButton(e)}>Login</Button>
+                        }} className={styles['form-input-field password']} />
+                        <p className={styles['signup-text']}>Don't have an account? <a className={styles['signup-link']} href="/">Sign Up</a></p>
+                        <Button className={styles['loginButton']} type="submit" variant='contained' size='large' onMouseEnter={(e) => handleButton(e)}>Login</Button>
 
                     </FormControl>
                 </div>
