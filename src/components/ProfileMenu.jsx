@@ -61,7 +61,10 @@ function ProfileMenu(props) {
                 <Avatar /> My account
             </MenuItem>
             <Divider />
-            <MenuItem onClick={props.handleClose}>
+            <MenuItem onClick={(e) => {
+                localStorage.setItem("token", "")
+                window.location.pathname = "/login"
+            }}>
                 <ListItemIcon>
                     <Logout fontSize="small" />
                 </ListItemIcon>
