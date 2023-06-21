@@ -41,6 +41,9 @@ function Login() {
                 theme: "light"
             });
         }
+        else {
+            return;
+        }
     }, [toastText])
     function handleButton(ev) {
         const passLength = formData.password.length;
