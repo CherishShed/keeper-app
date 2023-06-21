@@ -14,11 +14,7 @@ import Logout from '@mui/icons-material/Logout';
 
 function ProfileMenu(props) {
     const [anchorEl, setAnchorEl] = useState(props.anchorEl);
-    const open = Boolean(anchorEl);
-    const handleClose = () => {
-        setAnchorEl(null);
-    };
-
+    const open = Boolean(props.anchorEl);
     useEffect(() => {
         setAnchorEl(props.anchorEl)
     }, [props.anchorEl])
@@ -27,8 +23,8 @@ function ProfileMenu(props) {
             anchorEl={props.anchorEl}
             id="account-menu"
             open={open}
-            onClose={handleClose}
-            onClick={handleClose}
+            onClose={props.handleClose}
+            onClick={props.handleClose}
             PaperProps={{
                 elevation: 0,
                 sx: {
@@ -58,26 +54,14 @@ function ProfileMenu(props) {
             transformOrigin={{ horizontal: 'right', vertical: 'top' }}
             anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
         >
-            <MenuItem onClick={handleClose}>
-                <Avatar /> Profile
+            <MenuItem onClick={props.handleClose}>
+                {props.username}
             </MenuItem>
-            <MenuItem onClick={handleClose}>
+            <MenuItem onClick={props.handleClose}>
                 <Avatar /> My account
             </MenuItem>
             <Divider />
-            <MenuItem onClick={handleClose}>
-                <ListItemIcon>
-                    <PersonAdd fontSize="small" />
-                </ListItemIcon>
-                Add another account
-            </MenuItem>
-            <MenuItem onClick={handleClose}>
-                <ListItemIcon>
-                    <Settings fontSize="small" />
-                </ListItemIcon>
-                Settings
-            </MenuItem>
-            <MenuItem onClick={handleClose}>
+            <MenuItem onClick={props.handleClose}>
                 <ListItemIcon>
                     <Logout fontSize="small" />
                 </ListItemIcon>

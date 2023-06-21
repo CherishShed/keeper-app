@@ -27,7 +27,7 @@ import CollectionsBookmarkIcon from '@mui/icons-material/CollectionsBookmark';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import { Avatar, Grid, InputAdornment, TextField, Tooltip, useMediaQuery } from '@mui/material';
-import { SearchRounded } from '@mui/icons-material';
+import { Edit, SearchRounded } from '@mui/icons-material';
 import ProfileMenu from './ProfileMenu';
 
 
@@ -89,6 +89,8 @@ export default function ClippedDrawer(props) {
     const [loading, setLoading] = useState(true)
     const [open, setOpen] = useState(false);
     const [user, setUser] = useState({ ...props.user });
+    const [anchorEl, setAnchorEl] = useState(null);
+    const profileOpen = Boolean(anchorEl);
     function deleteItem(event, itemIndex) {
         const itemToDelete = notes[itemIndex]
         console.log(itemToDelete._id);
@@ -112,9 +114,11 @@ export default function ClippedDrawer(props) {
     const handleNavChange = (event, newValue) => {
         setValue(newValue);
     };
-    const [anchorEl, setAnchorEl] = useState(null);
     const handleProfileClick = (event) => {
         setAnchorEl(event.currentTarget);
+    };
+    const handleProfileClose = () => {
+        setAnchorEl(null);
     };
     useEffect(() => {
         setTimeout(() => {
@@ -183,14 +187,14 @@ export default function ClippedDrawer(props) {
                                     onClick={handleProfileClick}
                                     size="small"
                                     sx={{ ml: 2 }}
-                                    aria-controls={open ? 'account-menu' : undefined}
+                                    aria-controls={profileOpen ? 'account-menu' : undefined}
                                     aria-haspopup="true"
-                                    aria-expanded={open ? 'true' : undefined}
+                                    aria-expanded={profileOpen ? 'true' : undefined}
                                 >
-                                    <Avatar sx={{ width: 70, height: 70 }}><img alt="profile pic" src={`data:image/png;base64,${user.profilePic}`} className='profilePic' /></Avatar>
+                                    <Avatar sx={{ width: 50, height: 50 }}><img alt="profile pic" src={`data:image/png;base64,${user.profilePic}`} className='profilePic' /></Avatar>
                                 </IconButton>
                             </Tooltip>
-                            <ProfileMenu anchorEl={anchorEl} />
+                            <ProfileMenu anchorEl={anchorEl} handleClose={handleProfileClose} username={`${user.firstName} ${user.lastName}`} />
 
 
                         </Toolbar>
@@ -225,6 +229,15 @@ export default function ClippedDrawer(props) {
                                         </Tab>
                                     ))
                                 }
+                                <Tab key={1}
+                                    label="Edit Labels"
+                                    // onClick={(e) => props.getLabel(e)}
+                                    icon={<Edit style={{ width: "50px" }} />}
+                                    iconPosition='start'
+                                    color='secondary'
+
+                                >
+                                </Tab>
                             </Tabs>
                             <Divider />
 
