@@ -12,74 +12,55 @@ import "react-toastify/dist/ReactToastify.css";
 
 
 function DetailsForm() {
+    const [userData, setUserData] = useState({ firstName: "", lastName: "", username: "" })
 
+
+    function picChange(event) {
+        if (event.target.files.length > 0) {
+            const file = event.target.files[0];
+            const reader = new FileReader();
+            reader.onload = function () {
+                console.log(reader.result);
+                document.getElementsByClassName(styles["profile-image"])[0].setAttribute("src", reader.result);
+            }
+
+            reader.readAsDataURL(file);
+        }
+    }
+    useEffect(() => {
+        axios.get("http://localhost:8081/", { headers: { Authorization: localStorage.getItem("token") } })
+            .then((result) => {
+                console.log(result);
+                if (result.data.success) {
+                    setUserData({ ...userData, username: result.data.user.username });
+                }
+            })
+            .catch((error) => {
+                window.location.pathname = "/login"
+            })
+    }, [])
     return (
         <div className={styles["details-container"]}>
             <FormControl action="/profiledetails" method="POST" enctype="multipart/form-data" className={styles["details-form"]}>
+                <img alt="logo" src="Screenshot_2023-06-15_113137-removebg-preview.png" className='logo' />
                 <div className={styles["pic-container"]}>
                     <div className={styles["profile-image-container"]}>
                         <img src="/Images/avatar.png" alt="" className={styles["profile-image"]} />
                     </div>
                     <label>
-                        <Input type="file" style={{ display: "none" }} id="picfileInput" name="profilePic" accept="image/*" />
+                        <Input type="file" style={{ display: "none" }} id="picfileInput" name="profilePic" accept="image/*" onChange={(e) => picChange(e)} />
                     </label>
                     <Button className={styles["pic-icon"]}
                         variant="contained" color='secondary' onClick={(e) => document.getElementById('picfileInput').click()}>Change Picture<CloudUpload /></Button>
                 </div>
                 <div>
-                    <TextField name="fname" label="First Name" id="fname" required variant='outlined' color='warning' style={{ width: "50%" }} />
-                    <TextField name="lname" label="Last Name" id="lname" required variant='outlined' color='warning' style={{ width: "50%" }} /></div>
-                <TextField type="email" name="email" id="emailaddress" label="Email" variant='filled' disabled fullWidth />
-                <Button type="submit" variant="contained" color='success' className={styles["submit-button"]}>Submit</Button>
+                    <TextField name="fname" label="" placeholder='fname' id="fname" required variant='outlined' color='warning' style={{ width: "50%" }} value={userData.firstName} />
+                    <TextField name="lname" label="Last Name" id="lname" required variant='outlined' color='warning' style={{ width: "50%" }} value={userData.lastName} /></div>
+                <TextField type="email" name="email" id="emailaddress" label="Email" variant='filled' fullWidth value={userData.username} InputProps={{ startAdornment: <InputAdornment position='start'><AccountCircleIcon /></InputAdornment> }} />
+                <Button type="submit" size="large" variant="contained" color='success' className={styles["submit-button"]}>Submit</Button>
 
             </FormControl>
         </div>)
 }
 
 export default DetailsForm
-{/* 
-            var data = await userController.getMyProfile();
-            function fillPresentDetails(data) {
-
-    if (data.firstName != "" && data.firstName != null) {
-                $("#fname").prop("disabled", true)
-        $("#fname").val(data.firstName)
-    }
-            if (data.lastName != "" && data.lastName != null) {
-                $("#lname").prop("disabled", true)
-        $("#lname").val(data.lastName)
-    }
-            if (data.username != null && data.username != "") {
-                $("#emailaddress").prop("disabled", true)
-        $("#emailaddress").val(data.username)
-    }
-
-            if ((data.profilePic) != "") {
-                $(".profile-image").attr("src", "data:image/png;base64," + data.profilePic)
-        $("#picfileInput").val(data.profilePic);
-
-    } else if (data.googleProfilePic != "") {
-                $(".profile-image").attr("src", data.googleProfilePic)
-        $("#picfileinput").val(data.googleProfilePicture);
-
-    } else {
-                $(".profile-image").attr("src", "/Images/avatar.png")
-        $("#picfileinput").val("");
-
-    }
-
-
-}
-
-            $("#picfileInput").change(function (event) {
-    if (event.target.files.length > 0) {
-        const file = event.target.files[0];
-            const reader = new FileReader();
-            reader.onload = function () {
-                $(".profile-image").attr("src", reader.result);
-        }
-
-            reader.readAsDataURL(file);
-    }
-})
-            fillPresentDetails(data); */}

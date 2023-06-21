@@ -17,7 +17,9 @@ body {
     font-family: 'Kanit', sans-serif;
 
 }
-
+.details-container{
+    margin: 0 auto;
+}
 .navbar-brand {
     color: var(--text);
     font-weight: 500;
@@ -43,19 +45,19 @@ body {
 }
 
 .details-form {
-    min-width: 200px;
-    width: 40%;
-    height: 40%;
+    min-width: 200px !important;
+    width: 40% !important;
+    height: 40% !important;
     /* position: absolute; */
-    margin: 0 auto;
-    margin-top: 10%;
-    align-content: center;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    border: 2px solid var(--text);
-    padding: 20px;
-    box-shadow: 2px 2px 2px black;
+    margin: 0 auto !important;
+    margin-top: 10% !important;
+    align-content: center !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 10px !important;
+    border: 2px solid var(--text) !important;
+    padding: 20px !important;
+    box-shadow: 2px 2px 2px black !important;
 }
 
 .pic-container {
@@ -76,5 +78,6 @@ input {
 
 .submit-button {
     display: block;
-    margin: 0 auto
+    margin: 0 auto;
+    width: 150px;
 }

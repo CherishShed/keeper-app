@@ -86,7 +86,7 @@ function Login() {
                 settoastText(result.data.message)
                 setTimeout(() => {
                     if (result.data.success) {
-                        window.location.pathname = "/login"
+                        window.location.pathname = "/userDetails"
                     }
                 }, 1000)
 
