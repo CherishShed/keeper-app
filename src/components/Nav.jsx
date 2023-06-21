@@ -28,6 +28,7 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import { Avatar, Grid, InputAdornment, TextField, Tooltip, useMediaQuery } from '@mui/material';
 import { SearchRounded } from '@mui/icons-material';
+import ProfileMenu from './ProfileMenu';
 
 
 const drawerWidth = 240;
@@ -111,6 +112,10 @@ export default function ClippedDrawer(props) {
     const handleNavChange = (event, newValue) => {
         setValue(newValue);
     };
+    const [anchorEl, setAnchorEl] = useState(null);
+    const handleProfileClick = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
     useEffect(() => {
         setTimeout(() => {
             setNotes(props.notes);
@@ -175,7 +180,7 @@ export default function ClippedDrawer(props) {
                             <TextField variant='filled' placeholder='Search' style={{ backgroundColor: "white", width: "450px", margin: "0 auto" }} InputProps={{ startAdornment: <InputAdornment position="start"><SearchRounded /></InputAdornment> }} />
                             <Tooltip title="Account settings">
                                 <IconButton
-                                    // onClick={}
+                                    onClick={handleProfileClick}
                                     size="small"
                                     sx={{ ml: 2 }}
                                     aria-controls={open ? 'account-menu' : undefined}
@@ -185,6 +190,7 @@ export default function ClippedDrawer(props) {
                                     <Avatar sx={{ width: 70, height: 70 }}><img alt="profile pic" src={`data:image/png;base64,${user.profilePic}`} className='profilePic' /></Avatar>
                                 </IconButton>
                             </Tooltip>
+                            <ProfileMenu anchorEl={anchorEl} />
 
 
                         </Toolbar>

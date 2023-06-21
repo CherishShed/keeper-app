@@ -12,18 +12,19 @@ import PersonAdd from '@mui/icons-material/PersonAdd';
 import Settings from '@mui/icons-material/Settings';
 import Logout from '@mui/icons-material/Logout';
 
-function ProfileMenu() {
-    const [anchorEl, setAnchorEl] = React.useState(null);
+function ProfileMenu(props) {
+    const [anchorEl, setAnchorEl] = useState(props.anchorEl);
     const open = Boolean(anchorEl);
-    const handleClick = (event) => {
-        setAnchorEl(event.currentTarget);
-    };
     const handleClose = () => {
         setAnchorEl(null);
     };
+
+    useEffect(() => {
+        setAnchorEl(props.anchorEl)
+    }, [props.anchorEl])
     return (
         <Menu
-            anchorEl={anchorEl}
+            anchorEl={props.anchorEl}
             id="account-menu"
             open={open}
             onClose={handleClose}
