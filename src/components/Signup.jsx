@@ -83,14 +83,12 @@ function Login() {
         axios.post("http://localhost:8081/register", formData)
             .then((result) => {
                 console.log(result);
-                if (result.data.success) {
-                    window.location.pathname = "/login"
-                    setTimeout(() => {
-                        settoastText(result.data.message)
-                    }, 1000)
-                } else {
-                    settoastText(result.data.message)
-                }
+                settoastText(result.data.message)
+                setTimeout(() => {
+                    if (result.data.success) {
+                        window.location.pathname = "/login"
+                    }
+                }, 1000)
 
             })
     }

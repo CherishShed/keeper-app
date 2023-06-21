@@ -174,7 +174,7 @@ export default function ClippedDrawer(props) {
                             <TextField variant='filled' placeholder='Search' style={{ backgroundColor: "white", width: "450px", margin: "0 auto" }} InputProps={{ startAdornment: <InputAdornment position="start"><SearchRounded /></InputAdornment> }} />
                             <Typography variant="h6" noWrap component="div" style={{ position: "absolute", right: "20px", }}>
                                 {/* data:image/png;base64, */}
-                                <img alt="logo" src="pexels-anna-nekrashevich-8534163.jpg" className='profilePic' />
+                                <img alt="profile pic" src="pexels-anna-nekrashevich-8534163.jpg" className='profilePic' />
                             </Typography>
 
                         </Toolbar>

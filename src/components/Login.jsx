@@ -72,11 +72,13 @@ function Login() {
         axios.post("http://localhost:8081/login", formData)
             .then((result) => {
                 console.log(result);
-                if (result.data.success) {
-                    localStorage.setItem("token", result.data.token)
-                    window.location.pathname = "/"
-                }
                 settoastText(result.data.message)
+                setTimeout(() => {
+                    if (result.data.success) {
+                        localStorage.setItem("token", result.data.token)
+                        window.location.pathname = "/"
+                    }
+                }, 500)
 
             })
     }
