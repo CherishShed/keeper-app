@@ -29,7 +29,8 @@ function Login() {
                 className: 'foo-bar',
                 pauseOnHover: false,
                 autoClose: 1000,
-                theme: "light"
+                theme: "light",
+
             });
         } else if (toastText === "Login Success") {
             toast.success(toastText, {
@@ -37,9 +38,13 @@ function Login() {
                 className: 'foo-bar',
                 pauseOnHover: false,
                 autoClose: 1000,
-                theme: "light"
+                theme: "light",
             });
+        } else {
+            return;
         }
+
+        settoastText("")
     }, [toastText])
     function handleButton(ev) {
         const passLength = formData.password.length;

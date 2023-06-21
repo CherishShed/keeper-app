@@ -57,10 +57,22 @@ function Login() {
             ev.target.setAttribute("disabled", true)
         } else {
             ev.target.removeAttribute("disabled")
-            settextColor("green")
         }
         ev.target.style.left = displace;
     }
+
+    function handleCheck() {
+        const passLength = formData.password.length;
+        const usernameLength = formData.username.length;
+        if (passLength < 8 || usernameLength < 8) {
+            document.getElementsByClassName(styles.loginButton)[0].style.backgroundColor = "rgb(112, 41, 29)";
+            settextColor("red");
+        } else {
+            document.getElementsByClassName(styles.loginButton)[0].style.backgroundColor = " rgb(24, 100, 65)";
+            settextColor("green");
+        }
+    }
+
 
     function handleSubmit(event) {
         console.log("here")
@@ -91,12 +103,13 @@ function Login() {
                         <div>
                             <img alt="logo" src="Screenshot_2023-06-15_113137-removebg-preview.png" className={styles.logo} />
                             <p style={{ fontFamily: "Indie Flower", fontSize: "20px" }}>Welcome To Your Note Assistant</p>
-                            <p style={{ fontFamily: "Indie Flower", fontSize: "12px", color: { textColor } }}>*Password must be 8+ characters</p>
+                            <p style={{ fontFamily: "Indie Flower", fontSize: "12px", color: textColor }}>*Password must be 8+ characters</p>
                         </div>
                         <TextField fullWidth
 
                             helperText={helpText} variant='standard' label="Email" type='email' color='warning' name='username' required InputProps={{ startAdornment: <InputAdornment position="start"><AccountCircleIcon /></InputAdornment> }} className={styles["form-input-field"]}
                             onChange={(e) => {
+                                handleCheck();
                                 const elements = document.getElementsByClassName(styles.loginButton);
                                 elements[0].style.left = "0px";
                                 elements[0].removeAttribute("disabled");
@@ -107,6 +120,7 @@ function Login() {
                             key={1}
                         />
                         <TextField key={2} name='password' helperText={helpText} onChange={(e) => {
+                            handleCheck();
                             const elements = document.getElementsByClassName(styles.loginButton);
                             elements[0].style.left = "0px";
                             elements[0].removeAttribute("disabled");
@@ -127,7 +141,7 @@ function Login() {
                                 </InputAdornment>
                         }} className={styles['form-input-field password']} />
                         <p className={styles['signup-text']}>Don't have an account? <a className={styles['signup-link']} href="/login">Login</a></p>
-                        <Button className={styles['loginButton']} type="submit" variant='contained' size='large' onMouseEnter={(e) => handleButton(e)}>Sign Up</Button>
+                        <Button className={styles['loginButton']} style={{ backgroundColor: "rgb(112, 41, 29)" }} type="submit" variant='contained' size='large' onMouseEnter={(e) => handleButton(e)}>Sign Up</Button>
 
                     </FormControl>
                 </div>
