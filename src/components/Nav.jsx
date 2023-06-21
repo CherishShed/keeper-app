@@ -26,7 +26,7 @@ import ImageListItem from '@mui/material/ImageListItem';
 import CollectionsBookmarkIcon from '@mui/icons-material/CollectionsBookmark';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
-import { Grid, InputAdornment, TextField, useMediaQuery } from '@mui/material';
+import { Avatar, Grid, InputAdornment, TextField, Tooltip, useMediaQuery } from '@mui/material';
 import { SearchRounded } from '@mui/icons-material';
 
 
@@ -170,12 +170,22 @@ export default function ClippedDrawer(props) {
                             </IconButton>
                             <Typography variant="h6" noWrap component="div">
                                 <img alt="logo" src="Screenshot_2023-06-15_113137-removebg-preview.png" className='logo' />
+
                             </Typography>
                             <TextField variant='filled' placeholder='Search' style={{ backgroundColor: "white", width: "450px", margin: "0 auto" }} InputProps={{ startAdornment: <InputAdornment position="start"><SearchRounded /></InputAdornment> }} />
-                            <Typography variant="h6" noWrap component="div" style={{ position: "absolute", right: "20px", }}>
-                                {/* data:image/png;base64, */}
-                                <img alt="profile pic" src="pexels-anna-nekrashevich-8534163.jpg" className='profilePic' />
-                            </Typography>
+                            <Tooltip title="Account settings">
+                                <IconButton
+                                    // onClick={}
+                                    size="small"
+                                    sx={{ ml: 2 }}
+                                    aria-controls={open ? 'account-menu' : undefined}
+                                    aria-haspopup="true"
+                                    aria-expanded={open ? 'true' : undefined}
+                                >
+                                    <Avatar sx={{ width: 70, height: 70 }}><img alt="profile pic" src={`data:image/png;base64,${user.profilePic}`} className='profilePic' /></Avatar>
+                                </IconButton>
+                            </Tooltip>
+
 
                         </Toolbar>
                     </AppBar>
