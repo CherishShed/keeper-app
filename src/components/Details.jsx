@@ -41,17 +41,17 @@ function DetailsForm() {
     }, [])
     return (
         <div className={styles["details-container"]}>
-            <FormControl action="/profiledetails" method="POST" enctype="multipart/form-data" className={styles["details-form"]}>
+            <FormControl method="POST" encType="multipart/form-data" className={styles["details-form"]}>
                 <img alt="logo" src="Screenshot_2023-06-15_113137-removebg-preview.png" className='logo' />
                 <div className={styles["pic-container"]}>
                     <div className={styles["profile-image-container"]}>
-                        <img src="/Images/avatar.png" alt="" className={styles["profile-image"]} />
+                        <img src="avatar.png" alt="" className={styles["profile-image"]} />
                     </div>
                     <label>
                         <Input type="file" style={{ display: "none" }} id="picfileInput" name="profilePic" accept="image/*" onChange={(e) => picChange(e)} />
                     </label>
                     <Button className={styles["pic-icon"]}
-                        variant="contained" color='secondary' onClick={(e) => document.getElementById('picfileInput').click()}>Change Picture<CloudUpload /></Button>
+                        variant="contained" onClick={(e) => document.getElementById('picfileInput').click()}>Change Picture <CloudUpload /></Button>
                 </div>
                 <div>
                     <TextField name="fname" label="" placeholder='fname' id="fname" required variant='outlined' color='warning' style={{ width: "50%" }} value={userData.firstName} />
