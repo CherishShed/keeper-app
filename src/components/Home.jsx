@@ -51,7 +51,6 @@ function Home() {
             .then(response => {
                 console.log(response)
                 if (response.data.user.firstName === "" || response.data.user.lastName === "") {
-                    console.log("nope");
                     window.location.pathname = "/userDetails";
                 } else {
                     setUser({ ...response.data.user })
