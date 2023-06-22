@@ -178,7 +178,7 @@ export default function ClippedDrawer(props) {
                                 <MenuIcon />
                             </IconButton>
                             <Typography variant="h6" noWrap component="div">
-                                    <img alt="logo" src="Screenshot_2023-06-22_165157-removebg-preview.png" className='logo' />
+                                <img alt="logo" src="Screenshot_2023-06-22_165157-removebg-preview.png" className='logo' />
 
                             </Typography>
                             <TextField variant='filled' placeholder='Search' style={{ backgroundColor: "white", width: "450px", margin: "0 auto" }} InputProps={{ startAdornment: <InputAdornment position="start"><SearchRounded /></InputAdornment> }} />
