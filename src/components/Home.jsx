@@ -50,9 +50,14 @@ function Home() {
         axios.get("http://localhost:8081/", { headers: { Authorization: localStorage.getItem("token") } })
             .then(response => {
                 console.log(response)
-                setUser({ ...response.data.user })
-                setNotes([...response.data.user.notes])
-                setLoading(false);
+                if (response.data.user.firstName === "" || response.data.user.lastName === "") {
+                    console.log("nope");
+                    window.location.pathname = "/userDetails";
+                } else {
+                    setUser({ ...response.data.user })
+                    setNotes([...response.data.user.notes])
+                    setLoading(false);
+                }
 
             })
             .catch((err) => {
