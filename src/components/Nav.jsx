@@ -26,8 +26,8 @@ import ImageListItem from '@mui/material/ImageListItem';
 import CollectionsBookmarkIcon from '@mui/icons-material/CollectionsBookmark';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
-import { Avatar, Grid, InputAdornment, TextField, Tooltip, useMediaQuery } from '@mui/material';
-import { Edit, SearchRounded } from '@mui/icons-material';
+import { Avatar, Button, Grid, InputAdornment, TextField, Tooltip, useMediaQuery } from '@mui/material';
+import { Edit, NotesRounded, SearchRounded } from '@mui/icons-material';
 import ProfileMenu from './ProfileMenu';
 
 
@@ -87,7 +87,7 @@ export default function ClippedDrawer(props) {
     const [value, setValue] = useState(0);
     const [notes, setNotes] = useState([]);
     const [loading, setLoading] = useState(true)
-    const [open, setOpen] = useState(false);
+    const [open, setOpen] = useState(true);
     const [user, setUser] = useState({ ...props.user });
     const [anchorEl, setAnchorEl] = useState(null);
     const profileOpen = Boolean(anchorEl);
@@ -178,7 +178,7 @@ export default function ClippedDrawer(props) {
                                 <MenuIcon />
                             </IconButton>
                             <Typography variant="h6" noWrap component="div">
-                                <img alt="logo" src="Screenshot_2023-06-22_165157-removebg-preview.png" className='logo' />
+                                <img alt="logo" src="Screenshot_2023-06-15_113137-removebg-preview.png" className='logo' />
 
                             </Typography>
                             <TextField variant='filled' placeholder='Search' style={{ backgroundColor: "white", width: "450px", margin: "0 auto" }} InputProps={{ startAdornment: <InputAdornment position="start"><SearchRounded /></InputAdornment> }} />
@@ -208,6 +208,22 @@ export default function ClippedDrawer(props) {
                                 orientation="vertical"
 
                             >
+                                <Tab key={1}
+                                    label="Notes"
+                                    // onClick={(e) => props.getLabel(e)}
+                                    icon={<NotesRounded style={{ width: "50px" }} />}
+                                    iconPosition='start'
+                                    color='secondary'
+
+                                ></Tab>
+                                <Tab key={1}
+                                    label="Test"
+                                    // onClick={(e) => props.getLabel(e)}
+                                    icon={<NotesRounded style={{ width: "50px" }} />}
+                                    iconPosition='start'
+                                    color='secondary'
+
+                                ></Tab>
                                 {(loading) &&
                                     <div>
                                         <Skeleton component="li" />
@@ -229,15 +245,12 @@ export default function ClippedDrawer(props) {
                                         </Tab>
                                     ))
                                 }
-                                <Tab key={1}
-                                    label="Edit Labels"
-                                    // onClick={(e) => props.getLabel(e)}
-                                    icon={<Edit style={{ width: "50px" }} />}
-                                    iconPosition='start'
-                                    color='secondary'
-
+                                <Button style={{ color: "#000", alignItems: "left" }}
                                 >
-                                </Tab>
+                                    <Tab label="Edit Labels" icon={<Edit style={{ width: "50px" }} />} style={{ width: "100%", flexDirection: "row" }}>
+                                        Edit Labels
+                                    </Tab>
+                                </Button>
                             </Tabs>
                             <Divider />
 
