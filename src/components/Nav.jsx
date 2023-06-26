@@ -216,14 +216,6 @@ export default function ClippedDrawer(props) {
                                     color='secondary'
 
                                 ></Tab>
-                                <Tab key={1}
-                                    label="Test"
-                                    // onClick={(e) => props.getLabel(e)}
-                                    icon={<NotesRounded style={{ width: "50px" }} />}
-                                    iconPosition='start'
-                                    color='secondary'
-
-                                ></Tab>
                                 {(loading) &&
                                     <div>
                                         <Skeleton component="li" />
