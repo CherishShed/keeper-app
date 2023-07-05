@@ -86,11 +86,6 @@ body {
     left: 12%
 }
 
-input {
-    font-family: "Indie Flower" !important;
-    font-weight: bold !important;
-}
-
 @media (max-width:900px) {
     .signup-backImg {
         position: relative !important;
