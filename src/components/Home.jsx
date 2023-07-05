@@ -109,7 +109,6 @@ function Home() {
     }
   }
   const getLabel = (e) => {
-    setLoading(true);
     axios
       .get(`http://localhost:8081/api/label/${e.target.textContent}`, {
         headers: { Authorization: localStorage.getItem("token") },

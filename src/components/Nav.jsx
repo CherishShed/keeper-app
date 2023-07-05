@@ -143,7 +143,7 @@ export default function ClippedDrawer(props) {
     setTimeout(() => {
       setUser({ ...user, ...props.user });
     }, 100);
-  }, [props.user]);
+  }, []);
 
   const isSmallScreen = useMediaQuery("(max-width:600px)");
   const isMediumScreen = useMediaQuery("(max-width:900PX)");
