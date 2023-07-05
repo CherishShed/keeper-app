@@ -82,10 +82,6 @@ body{
     top: 10%;
     left: 12%
 }
-input{
-font-family:"Indie Flower" !important;
-font-weight: bold !important;
-}
 @media (max-width:00px) {
     .backImg {
         position: relative !important;

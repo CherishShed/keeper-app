@@ -1,6 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
+import { TextField } from "@mui/material";
 import Modal from "@mui/material/Modal";
 import { LabelModal } from "../contexts/HomeContext";
 
@@ -30,11 +31,9 @@ export default function AddLabelModal() {
       >
         <Box sx={style}>
           <Typography id="modal-modal-title" variant="h6" component="h2">
-            Text in a modal
+            Edit labels
           </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-          </Typography>
+          <TextField variant="standard" placeholder="Create new Label" />
         </Box>
       </Modal>
     </div>
