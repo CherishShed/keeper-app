@@ -6,6 +6,8 @@ import Modal from "@mui/material/Modal";
 import { LabelModal } from "../contexts/HomeContext";
 import AddIcon from "@mui/icons-material/Add";
 import DoneIcon from "@mui/icons-material/Done";
+import axios from "axios";
+import SnackFeed from "./SnackBarFeed";
 
 const style = {
   position: "absolute",
@@ -20,8 +22,19 @@ const style = {
 
 export default function AddLabelModal() {
   const { modalOpen, setModalOpen } = useContext(LabelModal);
+  const [labelKey, setLabelKey] = useState("");
   const handleClose = () => setModalOpen(false);
-  const addLabel = () => {};
+  const addLabel = () => {
+    axios.post("http://localhost:8081/newLabel", { key: labelKey }, {
+      headers: { Authorization: localStorage.getItem("token") },
+    })
+      .then((res) => {
+        handleClose();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   return (
     <div>
       <Modal
@@ -35,6 +48,8 @@ export default function AddLabelModal() {
             Edit labels
           </Typography>
           <TextField
+            value={labelKey}
+            onChange={(e) => setLabelKey(e.target.value)}
             variant="standard"
             placeholder="Create new Label"
             fullWidth
@@ -65,6 +80,7 @@ export default function AddLabelModal() {
           </Button>
         </Box>
       </Modal>
+      <SnackFeed />
     </div>
   );
 }
