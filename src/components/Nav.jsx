@@ -38,6 +38,7 @@ import {
 import { Edit, NotesRounded, SearchRounded } from "@mui/icons-material";
 import ProfileMenu from "./ProfileMenu";
 import { LabelModalContextProvider, LabelModal } from "../contexts/HomeContext";
+import AddLabelModal from "./LabelModal";
 
 const drawerWidth = 240;
 
@@ -98,7 +99,7 @@ export default function ClippedDrawer(props) {
   const [anchorEl, setAnchorEl] = useState(null);
   const profileOpen = Boolean(anchorEl);
   const { modalOpen, setModalOpen } = useContext(LabelModal);
-  console.log(modalOpen, setModalOpen);
+  //   console.log(modalOpen, setModalOpen);
   const handleLabelModalOpen = () => setModalOpen(true);
   function deleteItem(event, itemIndex) {
     const itemToDelete = notes[itemIndex];
@@ -315,6 +316,7 @@ export default function ClippedDrawer(props) {
                 ))}
               </ImageList>
             )}
+            <AddLabelModal />
           </Box>
         </Box>
       )}

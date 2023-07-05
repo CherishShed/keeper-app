@@ -4,12 +4,11 @@ export const LabelModal = createContext();
 export const TextColor = createContext();
 
 export function LabelModalContextProvider(props) {
+  const [modalOpen, setModalOpen] = useState(false);
 
-    const [modalOpen, setModalOpen] = useState(true); 
-
-    return (
-        <LabelModal.Provider value={{ modalOpen, setModalOpen }}>
-            {props.children}
-        </LabelModal.Provider>
-    )
+  return (
+    <LabelModal.Provider value={{ modalOpen, setModalOpen }}>
+      {props.children}
+    </LabelModal.Provider>
+  );
 }

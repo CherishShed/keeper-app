@@ -1,6 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
 import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import { LabelModal } from "../contexts/HomeContext";
@@ -17,9 +16,8 @@ const style = {
   p: 4,
 };
 
-export default function BasicModal() {
-  const [modalOpen, setModalOpen] = useContext(LabelModal);
-  const handleOpen = () => setModalOpen(true);
+export default function AddLabelModal() {
+  const { modalOpen, setModalOpen } = useContext(LabelModal);
   const handleClose = () => setModalOpen(false);
 
   return (
