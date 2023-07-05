@@ -152,6 +152,7 @@ function Home() {
               showAlert={showAlert}
               user={user}
               getLabel={getLabel}
+              getAllNotes={getUserData}
             />
           </LabelModalContextProvider>
           <div>

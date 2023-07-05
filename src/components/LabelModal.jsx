@@ -1,9 +1,11 @@
 import React, { useState, useContext, useEffect } from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import { TextField } from "@mui/material";
+import { TextField, FormControl, Button, InputAdornment } from "@mui/material";
 import Modal from "@mui/material/Modal";
 import { LabelModal } from "../contexts/HomeContext";
+import AddIcon from "@mui/icons-material/Add";
+import DoneIcon from "@mui/icons-material/Done";
 
 const style = {
   position: "absolute",
@@ -12,7 +14,6 @@ const style = {
   transform: "translate(-50%, -50%)",
   width: 400,
   bgcolor: "background.paper",
-  border: "2px solid #000",
   boxShadow: 24,
   p: 4,
 };
@@ -20,7 +21,7 @@ const style = {
 export default function AddLabelModal() {
   const { modalOpen, setModalOpen } = useContext(LabelModal);
   const handleClose = () => setModalOpen(false);
-
+  const addLabel = () => {};
   return (
     <div>
       <Modal
@@ -33,7 +34,35 @@ export default function AddLabelModal() {
           <Typography id="modal-modal-title" variant="subtitle1" component="h2">
             Edit labels
           </Typography>
-          <TextField variant="standard" placeholder="Create new Label" />
+          <TextField
+            variant="standard"
+            placeholder="Create new Label"
+            fullWidth
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <AddIcon></AddIcon>
+                </InputAdornment>
+              ),
+              endAdornment: (
+                <InputAdornment position="end">
+                  <Button color="success">
+                    <DoneIcon></DoneIcon>
+                  </Button>
+                </InputAdornment>
+              ),
+            }}
+          />
+          <Button
+            type="submit"
+            variant="text"
+            onClick={handleClose}
+            size="small"
+            style={{ right: "0", position: "absolute", bottom: "0" }}
+            color="success"
+          >
+            Done
+          </Button>
         </Box>
       </Modal>
     </div>

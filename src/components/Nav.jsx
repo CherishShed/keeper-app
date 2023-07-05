@@ -254,7 +254,7 @@ export default function ClippedDrawer(props) {
                 <Tab
                   key={1}
                   label="Notes"
-                  // onClick={(e) => props.getLabel(e)}
+                  onClick={props.getAllNotes}
                   icon={<NotesRounded style={{ width: "50px" }} />}
                   iconPosition="start"
                   color="secondary"
