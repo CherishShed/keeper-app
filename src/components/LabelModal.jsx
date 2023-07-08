@@ -3,7 +3,7 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import { TextField, FormControl, Button, InputAdornment } from "@mui/material";
 import Modal from "@mui/material/Modal";
-import { LabelModal } from "../contexts/HomeContext";
+import { LabelModal, SnackText } from "../contexts/HomeContext";
 import AddIcon from "@mui/icons-material/Add";
 import DoneIcon from "@mui/icons-material/Done";
 import axios from "axios";
@@ -22,6 +22,7 @@ const style = {
 
 export default function AddLabelModal() {
   const { modalOpen, setModalOpen } = useContext(LabelModal);
+  const { dispatchSnack } = useContext(SnackText);
   const [labelKey, setLabelKey] = useState("");
   const handleClose = () => setModalOpen(false);
   const addLabel = () => {
@@ -29,10 +30,10 @@ export default function AddLabelModal() {
       headers: { Authorization: localStorage.getItem("token") },
     })
       .then((res) => {
-        handleClose();
+        dispatchSnack({ type: "OPEN_SUCCESS_SNACK" });
       })
       .catch((err) => {
-        console.log(err);
+        dispatchSnack({ type: "OPEN_ERROR_SNACK" });
       });
   };
   return (
@@ -61,7 +62,7 @@ export default function AddLabelModal() {
               ),
               endAdornment: (
                 <InputAdornment position="end">
-                  <Button color="success">
+                  <Button color="success" onClick={addLabel}>
                     <DoneIcon></DoneIcon>
                   </Button>
                 </InputAdornment>
@@ -80,7 +81,6 @@ export default function AddLabelModal() {
           </Button>
         </Box>
       </Modal>
-      <SnackFeed />
     </div>
   );
 }

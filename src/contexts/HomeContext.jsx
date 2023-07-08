@@ -20,17 +20,17 @@ export function SnackTextContextProvider(props) {
         return { ...state, open: false, snackText: "", alertType: "" }
       case "OPEN_SUCCESS_SNACK":
         return { ...state, open: true, snackText: "Succesful", alertType: "success" }
-      case "OPEN_SUCCESS_SNACK":
+      case "OPEN_ERROR_SNACK":
         return { ...state, open: true, snackText: "An Error Occured", alertType: "error" }
       default:
         return state
     }
   }
-  const [snackState, dispatchSnack] = useReducer(snackReducer, {
+  const [snack, dispatchSnack] = useReducer(snackReducer, {
     open: false, snackText: "", alertType: ""
   })
   return (
-    <SnackText.Provider value={{ snackState, dispatchSnack }}>
+    <SnackText.Provider value={{ snack, dispatchSnack }}>
       {props.children}
     </SnackText.Provider>
   );

@@ -7,23 +7,43 @@ import { SnackText } from "../contexts/HomeContext";
 
 
 export default function SnackFeed() {
-    const { open, snackText, alertType } = useContext(SnackText);
+    const { snack, dispatchSnack } = useContext(SnackText);
+    console.log(snack)
+    const handleClose = (event, reason) => {
+        if (reason === "clickaway") {
+            return;
+        }
+        dispatchSnack({ type: "CLOSE_SNACK" });
+    };
     const Alert = React.forwardRef(function Alert(props, ref) {
         return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
     });
+    const action = (
+        <React.Fragment>
+            <IconButton
+                size="small"
+                aria-label="close"
+                color="inherit"
+                onClick={handleClose}
+            >
+                <CloseIcon fontSize="small" />
+            </IconButton>
+        </React.Fragment>
+    );
+
     return (
         <Snackbar
-            open={open}
+            open={snack.open}
             autoHideDuration={6000}
             onClose={handleClose}
             action={action}
         >
             <Alert
                 onClose={handleClose}
-                severity={alertType}
+                severity={"success"}
                 sx={{ width: "100%" }}
             >
-                {snackText}
+                {snack.snackText}
             </Alert>
         </Snackbar>
     )

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Footer from "./Footer";
 import Header from "./Header";
 import Note from "./Note";
@@ -11,39 +11,13 @@ import CloseIcon from "@mui/icons-material/Close";
 import MuiAlert from "@mui/material/Alert";
 import Button from "@mui/material/Button";
 import TemporaryDrawer from "./Nav";
-import { LabelModalContextProvider } from "../contexts/HomeContext";
+import { LabelModalContextProvider, SnackText, SnackTextContextProvider } from "../contexts/HomeContext";
+import SnackFeed from "./SnackBarFeed";
 
 function Home() {
   const [notes, setNotes] = useState([]);
-  const [open, setOpen] = useState(false);
-  const [snackText, setSnackText] = useState("");
-  const [alertType, setAlertType] = useState("");
   const [user, setUser] = useState({});
   const [loading, setLoading] = useState(true);
-  const Alert = React.forwardRef(function Alert(props, ref) {
-    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
-  });
-  const handleClose = (event, reason) => {
-    if (reason === "clickaway") {
-      return;
-    }
-
-    setOpen(false);
-  };
-
-  const action = (
-    <React.Fragment>
-      <IconButton
-        size="small"
-        aria-label="close"
-        color="inherit"
-        onClick={handleClose}
-      >
-        <CloseIcon fontSize="small" />
-      </IconButton>
-    </React.Fragment>
-  );
-
   function getUserData() {
     axios
       .get("http://localhost:8081/", {
@@ -77,11 +51,6 @@ function Home() {
     console.log(user);
   }, []);
 
-  function showAlert(status) {
-    setSnackText(status);
-    setAlertType(status);
-    setOpen(true);
-  }
 
   function addItem(noteText) {
     console.log("creatig");
@@ -98,8 +67,8 @@ function Home() {
           if (response.data.status === "success") {
             console.log("second");
             getUserData();
+            // dispatchSnack({ type: "OPEN_SUCCESS_SNACK" });
           }
-          showAlert(response.data.status);
         })
         .catch((err) => {
           if (err.response.data === "Unauthorized") {
@@ -146,30 +115,17 @@ function Home() {
         <div>
           <AddNote handleSubmit={addItem} />
           <LabelModalContextProvider>
-            <TemporaryDrawer
-              notes={notes}
-              showAlert={showAlert}
-              user={user}
-              getLabel={getLabel}
-              getAllNotes={getUserData}
-            />
+            <SnackTextContextProvider>
+              <TemporaryDrawer
+                notes={notes}
+                user={user}
+                getLabel={getLabel}
+                getAllNotes={getUserData}
+              />
+
+              <SnackFeed />
+            </SnackTextContextProvider>
           </LabelModalContextProvider>
-          <div>
-            <Snackbar
-              open={open}
-              autoHideDuration={6000}
-              onClose={handleClose}
-              action={action}
-            >
-              <Alert
-                onClose={handleClose}
-                severity={alertType}
-                sx={{ width: "100%" }}
-              >
-                {snackText}
-              </Alert>
-            </Snackbar>
-          </div>
           <Footer />
         </div>
       )}

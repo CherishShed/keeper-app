@@ -37,7 +37,7 @@ import {
 } from "@mui/material";
 import { Edit, NotesRounded, SearchRounded } from "@mui/icons-material";
 import ProfileMenu from "./ProfileMenu";
-import { LabelModalContextProvider, LabelModal } from "../contexts/HomeContext";
+import { LabelModalContextProvider, LabelModal, SnackTextContextProvider, SnackText } from "../contexts/HomeContext";
 import AddLabelModal from "./LabelModal";
 
 const drawerWidth = 240;
@@ -99,6 +99,7 @@ export default function ClippedDrawer(props) {
   const [anchorEl, setAnchorEl] = useState(null);
   const profileOpen = Boolean(anchorEl);
   const { modalOpen, setModalOpen } = useContext(LabelModal);
+  const { dispatchSnack } = useContext(SnackText);
   //   console.log(modalOpen, setModalOpen);
   const handleLabelModalOpen = () => setModalOpen(true);
   function deleteItem(event, itemIndex) {
@@ -110,8 +111,11 @@ export default function ClippedDrawer(props) {
         console.log(response);
         if (response.data.status === "success") {
           setNotes(notes.filter((item, index) => index !== itemIndex));
+          dispatchSnack({ type: "OPEN_SUCCESS_SNACK" });
         }
-        props.showAlert(response.data.status);
+        else {
+          dispatchSnack({ type: "OPEN_ERROR_SNACK" });
+        }
       });
   }
 
@@ -317,6 +321,7 @@ export default function ClippedDrawer(props) {
               </ImageList>
             )}
             <AddLabelModal />
+
           </Box>
         </Box>
       )}
