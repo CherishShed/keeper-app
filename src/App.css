@@ -1,52 +1,51 @@
-*{
+* {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
 }
 
-body{
-  font-family:"Montserrat","Helvetica Neue";
-  overflow-x:hidden;
+body {
+  font-family: Kanit, "Montserrat", "Helvetica Neue";
+  overflow-x: hidden;
 }
 
-:root{
-  --mainColor:"#9BABB8";
-  --secondaryColor:"#EEE3CB"
+:root {
+  --mainColor: "#9BABB8";
+  --secondaryColor: "#EEE3CB";
 }
 .logo {
-  width: 150px
+  width: 150px;
 }
-.profilePic{
+.profilePic {
   width: 100px;
   height: 60px;
   border-radius: 50%;
 }
-.note-container{
+.note-container {
   padding: 30px;
   min-height: 100%;
   display: flex;
   max-width: 100%;
   flex-direction: row;
   flex-wrap: wrap;
-
 }
-.MuiImageList-masonry{
+.MuiImageList-masonry {
   flex-wrap: wrap;
   /* min-width: 100%; */
   max-width: 100vw;
-    gap: 100px;
-      justify-content: space-evenly;
-      align-items: center;
+  gap: 100px;
+  justify-content: space-evenly;
+  align-items: center;
   /* width: 100%; */
 }
-.addNoteContainer{
+.addNoteContainer {
   width: 400px;
   height: fit-content;
   box-shadow: 2px 2px 2px#000;
   border-radius: 10px;
 }
 
-input:first-child{
+input:first-child {
   border-bottom: 2px solid #eee;
   border-radius: 10px 10px 0 0;
   width: 100%;
@@ -56,11 +55,11 @@ input:last-of-type {
   border-radius: 0 0 10px 10px;
   width: 100%;
 }
-.textfield{
+.textfield {
   background-color: white;
 }
 
-.note{
+.note {
   position: relative;
   background: white;
   color: black;
@@ -78,41 +77,41 @@ input:last-of-type {
   margin-bottom: 10px;
   text-overflow: ellipsis;
 }
-textarea{
-  border-radius:0 0 10px 10px;
+textarea {
+  border-radius: 0 0 10px 10px;
 }
-footer{
+footer {
   text-align: center;
   /* position: absolute; */
   bottom: 0;
   left: 45%;
 }
 
-.MuiBackdrop-root{
-background-color: purple;
-background: purple;
+.MuiBackdrop-root {
+  background-color: purple;
+  background: purple;
 }
 
-.MuiTabs-indicator{
-  background-color: #E5F9DB !important;
+.MuiTabs-indicator {
+  background-color: #e5f9db !important;
   font-size: 50px;
-  width: 5px !important
+  width: 5px !important;
 }
 
-.MuiTab-root:not(.Mui-selected):hover{
+.MuiTab-root:not(.Mui-selected):hover {
   background-color: hsla(244, 61%, 63%, 0.137) !important;
 }
-.Mui-selected{
+.Mui-selected {
   color: #fff !important;
-  background-color: #83764F !important;
+  background-color: #83764f !important;
 }
-@media (max-width:600px){
-  .note{
+@media (max-width: 600px) {
+  .note {
     min-width: 100%;
   }
 }
 
-@media ((max-width:900px) and (min-width:600px)) {
+@media ((max-width: 900px) and (min-width:600px)) {
   .note {
     /* background-color: aqua; */
     max-width: 50%;

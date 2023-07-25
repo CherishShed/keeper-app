@@ -112,11 +112,13 @@ function Login() {
                 src="Screenshot_2023-06-15_113137-removebg-preview.png"
                 className="logo"
               />
-              <p>Welcome To Your Note Assistant</p>
+              <p style={{ fontFamily: "Indie Flower", fontSize: "20px" }}>
+                Welcome To Your Note Assistant
+              </p>
             </div>
             <TextField
               fullWidth
-              style={{ fontFamily: "Indie Flower", fontWeight: "bold" }}
+              style={{ fontFamily: "Indie Flower", fontSize: "20px" }}
               helperText={helpText}
               variant="standard"
               label="Email"
