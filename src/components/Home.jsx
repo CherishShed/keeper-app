@@ -1,17 +1,10 @@
-import React, { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext } from "react";
 import Footer from "./Footer";
-import Header from "./Header";
-import Note from "./Note";
 import AddNote from "./AddNote";
 // import data from "./data";
 import axios from "axios";
-import Snackbar from "@mui/material/Snackbar";
-import IconButton from "@mui/material/IconButton";
-import CloseIcon from "@mui/icons-material/Close";
-import MuiAlert from "@mui/material/Alert";
-import Button from "@mui/material/Button";
 import TemporaryDrawer from "./Nav";
-import { LabelModalContextProvider, SnackText, SnackTextContextProvider } from "../contexts/HomeContext";
+import { LabelModalContextProvider, SnackTextContextProvider } from "../contexts/HomeContext";
 import SnackFeed from "./SnackBarFeed";
 
 function Home() {

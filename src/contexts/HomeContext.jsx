@@ -1,4 +1,4 @@
-import React, { createContext, useState, useReducer } from "react";
+import { createContext, useState, useReducer } from "react";
 
 export const LabelModal = createContext();
 export const SnackText = createContext();

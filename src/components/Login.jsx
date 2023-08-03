@@ -65,7 +65,6 @@ function Login() {
       ev.target.setAttribute("disabled", true);
     } else {
       ev.target.removeAttribute("disabled");
-      ev.target.style.background = "green";
     }
     ev.target.style.left = displace;
   }

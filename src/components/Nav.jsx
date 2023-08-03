@@ -1,23 +1,16 @@
-import React, { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext } from "react";
 import "../App.css";
-import { styled, useTheme } from "@mui/material/styles";
+import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import MuiDrawer from "@mui/material/Drawer";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
-import List from "@mui/material/List";
 import CssBaseline from "@mui/material/CssBaseline";
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
-import MailIcon from "@mui/icons-material/Mail";
 import axios from "axios";
 import Note from "./Note";
 import Skeleton from "@mui/material/Skeleton";
@@ -29,7 +22,6 @@ import Tab from "@mui/material/Tab";
 import {
   Avatar,
   Button,
-  Grid,
   InputAdornment,
   TextField,
   Tooltip,
@@ -37,7 +29,7 @@ import {
 } from "@mui/material";
 import { Edit, NotesRounded, SearchRounded } from "@mui/icons-material";
 import ProfileMenu from "./ProfileMenu";
-import { LabelModalContextProvider, LabelModal, SnackTextContextProvider, SnackText } from "../contexts/HomeContext";
+import { SnackText, LabelModal } from "../contexts/HomeContext";
 import AddLabelModal from "./LabelModal";
 
 const drawerWidth = 240;
