@@ -1,7 +1,7 @@
-import React, { useState, useContext, useEffect } from "react";
+import { useState, useContext } from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import { TextField, FormControl, Button, InputAdornment } from "@mui/material";
+import { TextField, Button, InputAdornment } from "@mui/material";
 import Modal from "@mui/material/Modal";
 import { LabelModal, SnackText } from "../contexts/HomeContext";
 import AddIcon from "@mui/icons-material/Add";

@@ -40,7 +40,7 @@ body {
   width: fit-content !important;
   min-width: 300px !important;
   z-index: 3;
-  right: 25% !important;
+  right: 20% !important;
   top: 20% !important;
   min-height: 70%;
   /* justify-content: center; */
