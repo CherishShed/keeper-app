@@ -69,6 +69,15 @@ function Login() {
     }
     ev.target.style.left = displace;
   }
+  function handleCheck() {
+    const passLength = formData.password.length;
+    const usernameLength = formData.username.length;
+    if (passLength < 8 || usernameLength < 8) {
+      document.getElementsByClassName("loginButton")[0].style.backgroundColor = "rgb(112, 41, 29)";
+    } else {
+      document.getElementsByClassName("loginButton")[0].style.backgroundColor = " rgb(24, 100, 65)";
+    }
+  }
 
   function handleSubmit(event) {
     console.log("here");
@@ -84,6 +93,9 @@ function Login() {
       }, 500);
     });
   }
+  window.addEventListener("load", () => {
+    document.getElementById("usernameInput").focus();
+  })
   return (
     <div>
       <ToastContainer />
@@ -124,6 +136,7 @@ function Login() {
               type="email"
               color="warning"
               name="username"
+              id="usernameInput"
               required
               InputProps={{
                 startAdornment: (
@@ -139,6 +152,7 @@ function Login() {
                   .querySelector(".loginButton")
                   .removeAttribute("disabled");
                 setFormData({ ...formData, username: e.target.value });
+                handleCheck();
               }}
               value={formData.username}
               key={1}
@@ -154,6 +168,7 @@ function Login() {
                   .querySelector(".loginButton")
                   .removeAttribute("disabled");
                 setFormData({ ...formData, password: e.target.value });
+                handleCheck();
               }}
               value={formData.password}
               variant="standard"
@@ -198,6 +213,7 @@ function Login() {
               variant="contained"
               size="large"
               onMouseEnter={(e) => handleButton(e)}
+              style={{ backgroundColor: "rgb(121, 68, 59)" }}
             >
               Login
             </Button>
