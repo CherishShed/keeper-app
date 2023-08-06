@@ -108,9 +108,9 @@ function Home() {
       {!loading && (
         <div>
           <AddNote handleSubmit={addItem} />
-          <UserContextProvider>
-            <LabelModalContextProvider>
-              <SnackTextContextProvider>
+          <SnackTextContextProvider>
+            <UserContextProvider>
+              <LabelModalContextProvider>
                 <TemporaryDrawer
                   notes={notes}
                   user={user}
@@ -119,9 +119,9 @@ function Home() {
                 />
 
                 <SnackFeed />
-              </SnackTextContextProvider>
-            </LabelModalContextProvider>
-          </UserContextProvider>
+              </LabelModalContextProvider>
+            </UserContextProvider>
+          </SnackTextContextProvider>
           <Footer />
         </div>
       )}

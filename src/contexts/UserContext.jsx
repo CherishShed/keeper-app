@@ -17,7 +17,7 @@ export function UserContextProvider(props) {
                     })
                     .then((response) => {
                         console.log(response);
-                        setUser({ ...user, ...response.data.user });
+                        return { ...state, ...response.data.user };
                         // setLabels([...response.data.user.labels]);
                     })
                     .catch((err) => {
@@ -32,7 +32,7 @@ export function UserContextProvider(props) {
                 })
                     .then(() => {
                         dispatchSnack({ type: "OPEN_SUCCESS_SNACK" });
-                        user.labels.push(action.labelKey)
+                        state.labels.push(action.labelKey)
                     })
                     .catch(() => {
                         dispatchSnack({ type: "OPEN_ERROR_SNACK" });

@@ -31,6 +31,7 @@ import { Edit, NotesRounded, SearchRounded } from "@mui/icons-material";
 import ProfileMenu from "./ProfileMenu";
 import { SnackText, LabelModal } from "../contexts/HomeContext";
 import AddLabelModal from "./LabelModal";
+import { UserContext } from "../contexts/UserContext";
 
 const drawerWidth = 240;
 
@@ -87,7 +88,7 @@ export default function ClippedDrawer(props) {
   const [notes, setNotes] = useState([]);
   const [loading, setLoading] = useState(true);
   const [open, setOpen] = useState(true);
-  const [user, setUser] = useState({ ...props.user });
+  const [user, dispatchUser] = useContext(UserContext);
   const [anchorEl, setAnchorEl] = useState(null);
   const profileOpen = Boolean(anchorEl);
   const { modalOpen, setModalOpen } = useContext(LabelModal);
@@ -137,6 +138,7 @@ export default function ClippedDrawer(props) {
 
   useEffect(() => {
     setTimeout(() => {
+      dispatchUser({ type: "SET_USER" })
       setUser({ ...user, ...props.user });
     }, 100);
   }, []);
