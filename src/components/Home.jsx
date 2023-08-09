@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect } from "react";
 import Footer from "./Footer";
 import AddNote from "./AddNote";
 // import data from "./data";
@@ -6,7 +6,11 @@ import axios from "axios";
 import TemporaryDrawer from "./Nav";
 import { LabelModalContextProvider, SnackTextContextProvider } from "../contexts/HomeContext";
 import SnackFeed from "./SnackBarFeed";
+<<<<<<< HEAD
 import { LabelContextProvider } from "../contexts/LabelContext";
+=======
+import { UserContextProvider } from "../contexts/UserContext";
+>>>>>>> a1233254e6073b7b920a62199ae00fead6473abd
 
 function Home() {
   const [notes, setNotes] = useState([]);
@@ -108,8 +112,13 @@ function Home() {
       {!loading && (
         <div>
           <AddNote handleSubmit={addItem} />
+<<<<<<< HEAD
           <LabelContextProvider>
             <SnackTextContextProvider>
+=======
+          <SnackTextContextProvider>
+            <UserContextProvider>
+>>>>>>> a1233254e6073b7b920a62199ae00fead6473abd
               <LabelModalContextProvider>
                 <TemporaryDrawer
                   notes={notes}
@@ -120,8 +129,13 @@ function Home() {
 
                 <SnackFeed />
               </LabelModalContextProvider>
+<<<<<<< HEAD
             </SnackTextContextProvider>
           </LabelContextProvider>
+=======
+            </UserContextProvider>
+          </SnackTextContextProvider>
+>>>>>>> a1233254e6073b7b920a62199ae00fead6473abd
           <Footer />
         </div>
       )}
