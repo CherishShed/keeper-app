@@ -6,11 +6,7 @@ import axios from "axios";
 import TemporaryDrawer from "./Nav";
 import { LabelModalContextProvider, SnackTextContextProvider } from "../contexts/HomeContext";
 import SnackFeed from "./SnackBarFeed";
-<<<<<<< HEAD
 import { LabelContextProvider } from "../contexts/LabelContext";
-=======
-import { UserContextProvider } from "../contexts/UserContext";
->>>>>>> a1233254e6073b7b920a62199ae00fead6473abd
 
 function Home() {
   const [notes, setNotes] = useState([]);
@@ -111,35 +107,25 @@ function Home() {
       )}
       {!loading && (
         <div>
-          <AddNote handleSubmit={addItem} />
-<<<<<<< HEAD
           <LabelContextProvider>
-            <SnackTextContextProvider>
-=======
-          <SnackTextContextProvider>
-            <UserContextProvider>
->>>>>>> a1233254e6073b7b920a62199ae00fead6473abd
-              <LabelModalContextProvider>
+            <LabelModalContextProvider>
+              <AddNote handleSubmit={addItem} />
+              <SnackTextContextProvider>
                 <TemporaryDrawer
                   notes={notes}
                   user={user}
                   getLabel={getLabel}
                   getAllNotes={getUserData}
                 />
-
                 <SnackFeed />
-              </LabelModalContextProvider>
-<<<<<<< HEAD
-            </SnackTextContextProvider>
+              </SnackTextContextProvider>
+            </LabelModalContextProvider>
           </LabelContextProvider>
-=======
-            </UserContextProvider>
-          </SnackTextContextProvider>
->>>>>>> a1233254e6073b7b920a62199ae00fead6473abd
           <Footer />
-        </div>
-      )}
-    </div>
+        </div >
+      )
+      }
+    </div >
   );
 }
 
