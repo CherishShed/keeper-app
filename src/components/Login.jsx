@@ -50,7 +50,13 @@ function Login() {
 
     settoastText("");
   }, [toastText]);
+  useEffect(() => {
+
+  })
   function handleButton(ev) {
+    console.log(document.getElementById("usernameInput").value)
+    document.getElementById("loginPage").click()
+    handleCheck()
     const passLength = formData.password.length;
     const usernameLength = formData.username.length;
     const offset = ev.target.offsetLeft;
@@ -99,7 +105,7 @@ function Login() {
     <div>
       <ToastContainer />
       <div className="loginForm">
-        <div className="login">
+        <div className="login" id="loginPage">
           <img
             src="pexels-mockupbee-12039670.jpg"
             className="backImg"
@@ -136,6 +142,8 @@ function Login() {
               color="warning"
               name="username"
               id="usernameInput"
+              autoComplete="off"
+              autoFocus={false}
               required
               InputProps={{
                 startAdornment: (
@@ -160,6 +168,8 @@ function Login() {
               style={{ fontFamily: "Indie Flower", fontWeight: "bold" }}
               key={2}
               name="password"
+              autoComplete="off"
+              autoFocus={true}
               helperText={helpText}
               onChange={(e) => {
                 document.querySelector(".loginButton").style.left = "0px";

@@ -6,7 +6,7 @@
 
 body {
   font-family: Kanit, "Montserrat", "Helvetica Neue";
-  overflow-x: hidden;
+  overflow-x: scroll;
 }
 
 :root {

@@ -31,6 +31,7 @@ import { Edit, NotesRounded, SearchRounded } from "@mui/icons-material";
 import ProfileMenu from "./ProfileMenu";
 import { SnackText, LabelModal } from "../contexts/HomeContext";
 import AddLabelModal from "./LabelModal";
+import { LabelContext } from "../contexts/LabelContext";
 
 const drawerWidth = 240;
 
@@ -88,6 +89,7 @@ export default function ClippedDrawer(props) {
   const [loading, setLoading] = useState(true);
   const [open, setOpen] = useState(true);
   const [user, setUser] = useState({ ...props.user });
+  const { labels, setLabels } = useContext(LabelContext);
   const [anchorEl, setAnchorEl] = useState(null);
   const profileOpen = Boolean(anchorEl);
   const { modalOpen, setModalOpen } = useContext(LabelModal);
@@ -129,6 +131,7 @@ export default function ClippedDrawer(props) {
   };
   useEffect(() => {
     setTimeout(() => {
+      console.log(labels)
       setNotes(props.notes);
       setLoading(false);
     }, 1000);
@@ -197,12 +200,13 @@ export default function ClippedDrawer(props) {
                 />
               </Typography>
               <TextField
-                variant="filled"
-                placeholder="Search"
+                variant="standard"
+                // label="Search"
+                color="info"
                 style={{
-                  backgroundColor: "white",
                   width: "450px",
                   margin: "0 auto",
+                  outline: "none"
                 }}
                 InputProps={{
                   startAdornment: (
@@ -239,7 +243,7 @@ export default function ClippedDrawer(props) {
           </AppBar>
           <Drawer variant="permanent" open={open}>
             <Toolbar />
-            <Box sx={{ overflow: "hidden" }}>
+            <Box sx={{ overflowY: "scroll" }}>
               {/* {console.log(props.user)} */}
 
               <Tabs
@@ -264,7 +268,7 @@ export default function ClippedDrawer(props) {
                   </div>
                 )}
                 {!loading &&
-                  [...user.labels].map((label, index) => (
+                  labels.map((label, index) => (
                     <Tab
                       key={label._id}
                       label={label.key}

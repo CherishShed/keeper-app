@@ -6,6 +6,7 @@ import axios from "axios";
 import TemporaryDrawer from "./Nav";
 import { LabelModalContextProvider, SnackTextContextProvider } from "../contexts/HomeContext";
 import SnackFeed from "./SnackBarFeed";
+import { LabelContextProvider } from "../contexts/LabelContext";
 
 function Home() {
   const [notes, setNotes] = useState([]);
@@ -107,18 +108,20 @@ function Home() {
       {!loading && (
         <div>
           <AddNote handleSubmit={addItem} />
-          <LabelModalContextProvider>
+          <LabelContextProvider>
             <SnackTextContextProvider>
-              <TemporaryDrawer
-                notes={notes}
-                user={user}
-                getLabel={getLabel}
-                getAllNotes={getUserData}
-              />
+              <LabelModalContextProvider>
+                <TemporaryDrawer
+                  notes={notes}
+                  user={user}
+                  getLabel={getLabel}
+                  getAllNotes={getUserData}
+                />
 
-              <SnackFeed />
+                <SnackFeed />
+              </LabelModalContextProvider>
             </SnackTextContextProvider>
-          </LabelModalContextProvider>
+          </LabelContextProvider>
           <Footer />
         </div>
       )}

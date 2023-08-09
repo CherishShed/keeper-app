@@ -8,6 +8,7 @@ import AddIcon from "@mui/icons-material/Add";
 import DoneIcon from "@mui/icons-material/Done";
 import axios from "axios";
 import SnackFeed from "./SnackBarFeed";
+import { LabelContext } from "../contexts/LabelContext";
 
 const style = {
   position: "absolute",
@@ -24,12 +25,15 @@ export default function AddLabelModal() {
   const { modalOpen, setModalOpen } = useContext(LabelModal);
   const { dispatchSnack } = useContext(SnackText);
   const [labelKey, setLabelKey] = useState("");
+  const { labels, setLabels } = useContext(LabelContext);
   const handleClose = () => setModalOpen(false);
   const addLabel = () => {
     axios.post("http://localhost:8081/newLabel", { key: labelKey }, {
       headers: { Authorization: localStorage.getItem("token") },
     })
       .then((res) => {
+        console.log(res);
+        setLabels([...res.data.data])
         dispatchSnack({ type: "OPEN_SUCCESS_SNACK" });
       })
       .catch((err) => {
