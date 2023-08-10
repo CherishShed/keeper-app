@@ -29,8 +29,21 @@ export default function AddLabelModal() {
   const [labelKey, setLabelKey] = useState("");
   const { labels, setLabels } = useContext(LabelContext);
   const handleClose = () => setModalOpen(false);
-  const addLabel = () => {
+  const addLabel = (labelKey) => {
     axios.post("http://localhost:8081/newLabel", { key: labelKey }, {
+      headers: { Authorization: localStorage.getItem("token") },
+    })
+      .then((res) => {
+        console.log(res);
+        setLabels([...res.data.data])
+        dispatchSnack({ type: "OPEN_SUCCESS_SNACK" });
+      })
+      .catch((err) => {
+        dispatchSnack({ type: "OPEN_ERROR_SNACK" });
+      });
+  };
+  const editLabel = (oldKey, newKey) => {
+    axios.patch("http://localhost:8081/editLabel", { oldKey, newKey }, {
       headers: { Authorization: localStorage.getItem("token") },
     })
       .then((res) => {
@@ -68,7 +81,7 @@ export default function AddLabelModal() {
               ),
               endAdornment: (
                 <InputAdornment position="end">
-                  <Button color="success" onClick={addLabel}>
+                  <Button color="success" onClick={() => addLabel(labelKey)}>
                     <DoneIcon></DoneIcon>
                   </Button>
                 </InputAdornment>
@@ -79,7 +92,7 @@ export default function AddLabelModal() {
             <List>
               {labels.map((label, index) => {
                 return (
-                  <LabelModalList key={label._id} label={label} index={index}></LabelModalList>
+                  <LabelModalList key={label._id} label={label} index={index} editLabel={editLabel}></LabelModalList>
                 )
               })}
             </List>

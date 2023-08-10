@@ -1,9 +1,12 @@
 import { useState } from "react";
 import { CollectionsBookmarkOutlined, Delete } from "@mui/icons-material";
-import { TextField, InputAdornment, ListItem } from "@mui/material";
+import { TextField, InputAdornment, ListItem, Button } from "@mui/material";
 
-export default function LabelModalList({ label, index }) {
+import DoneIcon from "@mui/icons-material/Done";
+export default function LabelModalList({ label, index, editLabel }) {
+    const originalKey = label.key;
     const [overLabel, setOverLabel] = useState(false);
+    const [labelKey, setLabelKey] = useState(label.key)
     return (
         <ListItem
             onMouseEnter={() => setOverLabel(true)}
@@ -14,10 +17,17 @@ export default function LabelModalList({ label, index }) {
                         <InputAdornment position="start">
                             {(!overLabel) ? <CollectionsBookmarkOutlined /> : <Delete />}
                         </InputAdornment>
-                    ),
+                    ), endAdornment: (
+                        <InputAdornment position="end">
+                            <Button color="success" onClick={() => editLabel(originalKey, labelKey)}>
+                                <DoneIcon></DoneIcon>
+                            </Button>
+                        </InputAdornment>
+                    )
                 }}
                 key={index}
-                value={label.key}
+                value={labelKey}
+                onChange={(e) => setLabelKey(e.target.value)}
                 color="info"
                 variant="standard"
                 fullWidth
