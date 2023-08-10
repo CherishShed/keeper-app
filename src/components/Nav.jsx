@@ -50,9 +50,10 @@ const closedMixin = (theme) => ({
     duration: theme.transitions.duration.leavingScreen,
   }),
   overflowX: "hidden",
-  width: `calc(${theme.spacing(7)} + 1px)`,
+  overflowY: "hidden",
+  width: `calc(${theme.spacing(10)} + 0px)`,
   [theme.breakpoints.up("sm")]: {
-    width: `calc(${theme.spacing(5.5)} + 1px)`,
+    width: `calc(${theme.spacing(5.5)} + 25px)`,
   },
 });
 
@@ -243,7 +244,7 @@ export default function ClippedDrawer(props) {
           </AppBar>
           <Drawer variant="permanent" open={open}>
             <Toolbar />
-            <Box sx={{ overflowY: "scroll", alignItems: "start" }}>
+            <Box sx={{ overflowY: "scroll", alignItems: "start", padding: "0" }} id="labelsBox">
               {/* {console.log(props.user)} */}
 
               <Tabs
@@ -258,7 +259,7 @@ export default function ClippedDrawer(props) {
                   icon={<NotesRounded style={{ width: "50px" }} />}
                   iconPosition="start"
                   color="secondary"
-                  style={{ justifyContent: "left" }}
+                  style={{ justifyContent: "left", height: "10px", padding: "5px" }}
                 ></Tab>
                 {loading && (
                   <div>
@@ -273,19 +274,20 @@ export default function ClippedDrawer(props) {
                     <Tab
                       key={label._id}
                       label={label.key}
-                      style={{ justifyContent: "left" }}
+                      style={{ justifyContent: "left", height: "10px", padding: "0" }}
                       onClick={(e) => props.getLabel(e)}
                       icon={
-                        <CollectionsBookmarkIcon style={{ width: "50px" }} />
+                        <CollectionsBookmarkIcon style={{ width: "50px", height: "15px", padding: "0" }} />
                       }
                       iconPosition="start"
                       color="secondary"
                     ></Tab>
                   ))}
-                <Button style={{ color: "#000", alignItems: "left" }}>
+                <Button style={{ color: "#000", alignItems: "left", alignSelf: "left", justifyContent: "left", justifySelf: "left" }}>
                   <Tab
                     label="Edit Labels"
-                    icon={<Edit style={{ width: "50px" }} />}
+                    icon={<Edit style={{ width: "50px", alignSelf: "left" }} />}
+                    iconPosition="start"
                     style={{ width: "100%", flexDirection: "row", justifyContent: "left" }}
                     onClick={handleLabelModalOpen}
                   >
