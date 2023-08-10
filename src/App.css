@@ -86,13 +86,14 @@ footer {
   bottom: 0;
   left: 45%;
 }
-#labelsBox::-webkit-scrollbar{
+#labelsBox::-webkit-scrollbar, #labelModalList::-webkit-scrollbar {
   width: 5px;
   background-color: var(--secondaryColor);
 }
-#labelsBox::-webkit-scrollbar-thumb{
+#labelsBox::-webkit-scrollbar-thumb, #labelModalList::-webkit-scrollbar-thumb{
   background-color: var(--mainColor);
 }
+
 .MuiBackdrop-root {
   background-color: purple;
   background: purple;

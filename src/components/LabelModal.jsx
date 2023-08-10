@@ -1,7 +1,9 @@
 import { useState, useContext } from "react";
+// import "../App.css";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
-import { TextField, Button, InputAdornment } from "@mui/material";
+import { TextField, Button, InputAdornment, List, } from "@mui/material";
+import LabelModalList from "./LabelModalListItem";
 import Modal from "@mui/material/Modal";
 import { LabelModal, SnackText } from "../contexts/HomeContext";
 import AddIcon from "@mui/icons-material/Add";
@@ -73,6 +75,16 @@ export default function AddLabelModal() {
               ),
             }}
           />
+          <Box style={{ width: "100%", alignSelf: "center", maxHeight: "250px", overflowX: "hidden", overflowY: "scroll" }} id="labelModalList">
+            <List>
+              {labels.map((label, index) => {
+                return (
+                  <LabelModalList key={label._id} label={label} index={index}></LabelModalList>
+                )
+              })}
+            </List>
+
+          </Box>
           <Button
             type="submit"
             variant="text"
