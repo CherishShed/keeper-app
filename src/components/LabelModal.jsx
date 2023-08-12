@@ -9,7 +9,6 @@ import { LabelModal, SnackText } from "../contexts/HomeContext";
 import AddIcon from "@mui/icons-material/Add";
 import DoneIcon from "@mui/icons-material/Done";
 import axios from "axios";
-import SnackFeed from "./SnackBarFeed";
 import { LabelContext } from "../contexts/LabelContext";
 
 const style = {
@@ -38,7 +37,7 @@ export default function AddLabelModal() {
         setLabels([...res.data.data])
         dispatchSnack({ type: "OPEN_SUCCESS_SNACK" });
       })
-      .catch((err) => {
+      .catch(() => {
         dispatchSnack({ type: "OPEN_ERROR_SNACK" });
       });
   };
@@ -51,7 +50,7 @@ export default function AddLabelModal() {
         setLabels([...res.data.data])
         dispatchSnack({ type: "OPEN_SUCCESS_SNACK" });
       })
-      .catch((err) => {
+      .catch(() => {
         dispatchSnack({ type: "OPEN_ERROR_SNACK" });
       });
   };
