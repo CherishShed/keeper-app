@@ -244,7 +244,7 @@ export default function ClippedDrawer(props) {
           </AppBar>
           <Drawer variant="permanent" open={open}>
             <Toolbar />
-            <Box sx={{ overflowY: "scroll", alignItems: "start", padding: "0" }} id="labelsBox">
+            <Box sx={{ overflowY: "auto", alignItems: "start", padding: "0" }} id="labelsBox">
               {/* {console.log(props.user)} */}
 
               <Tabs
@@ -298,7 +298,7 @@ export default function ClippedDrawer(props) {
               <Divider />
             </Box>
           </Drawer>
-          <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+          <Box component="main" sx={{ flexGrow: 1, p: 3 }} id="main-container">
             <Toolbar />
             {!loading && (
               <ImageList
