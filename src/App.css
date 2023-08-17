@@ -29,7 +29,7 @@ body {
   max-width: 100%;
   flex-direction: row;
   flex-wrap: wrap;
-  overflow-y: auto !important;
+  overflow-y: scroll !important;
   
 }
 #main-container{
@@ -47,6 +47,7 @@ padding: 10px;
   justify-content: space-evenly;
   align-items: center; 
   width: 100%;
+
 }
 .addNoteContainer {
   width: 400px;
@@ -101,7 +102,7 @@ footer {
   width: 5px;
   background-color: var(--secondaryColor);
 }
-#labelsBox::-webkit-scrollbar-thumb, #labelModalList::-webkit-scrollbar-thumb{
+#labelsBox::-webkit-scrollbar-thumb, #labelModalList::-webkit-scrollbar-thumb, #main-container::-webkit-scrollbar-thumb, .note-container::-webkit-scrollbar-thumb{
   background-color: var(--mainColor);
 }
 

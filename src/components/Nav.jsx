@@ -50,7 +50,7 @@ const closedMixin = (theme) => ({
     duration: theme.transitions.duration.leavingScreen,
   }),
   overflowX: "hidden",
-  overflowY: "hidden",
+  overflowY: "scroll",
   width: `calc(${theme.spacing(10)} + 0px)`,
   [theme.breakpoints.up("sm")]: {
     width: `calc(${theme.spacing(5.5)} + 25px)`,
