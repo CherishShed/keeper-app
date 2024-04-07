@@ -1,11 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import ReactDOM from 'react-dom';
+import { useEffect, useState } from 'react';
 import styles from "../details.module.css"
-import { Box, Button, FormControl, Input, InputAdornment, TextField, Typography } from '@mui/material';
+import { Button, FormControl, Input, InputAdornment, TextField} from '@mui/material';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import EnhancedEncryptionIcon from '@mui/icons-material/EnhancedEncryption';
-import { IconButton } from '@mui/material';
-import { CloudUpload, VisibilityOffOutlined, VisibilityOutlined } from "@mui/icons-material"
+import { CloudUpload} from "@mui/icons-material"
 import axios from 'axios';
 import { toast, ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
@@ -37,6 +34,7 @@ function DetailsForm() {
                 }
             })
             .catch((error) => {
+                console.log(error)
                 window.location.pathname = "/login"
             })
     }, [])
@@ -89,7 +87,7 @@ function DetailsForm() {
                         <Input type="file" style={{ display: "none" }} id="picfileInput" name="profilePic" accept="image/*" onChange={(e) => picChange(e)} />
                     </label>
                     <Button className={styles["pic-icon"]}
-                        variant="contained" onClick={(e) => document.getElementById('picfileInput').click()}>Change Picture <CloudUpload /></Button>
+                        variant="contained" onClick={() => document.getElementById('picfileInput').click()}>Change Picture <CloudUpload /></Button>
                 </div>
                 <div>
                     <TextField name="firstName" label="First Name" id="fname" required variant='outlined' color='warning' style={{ width: "50%" }} value={userData.firstName}

@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import "../auth.css";
 import {
-  Box,
+  
   Button,
   FormControl,
   InputAdornment,
   TextField,
-  Typography,
+  
 } from "@mui/material";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import EnhancedEncryptionIcon from "@mui/icons-material/EnhancedEncryption";
@@ -19,7 +19,6 @@ import "react-toastify/dist/ReactToastify.css";
 function Login() {
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({ username: "", password: "" });
-  const [helpText, setHelpText] = useState("");
   const [toastText, settoastText] = useState("");
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
@@ -135,7 +134,6 @@ function Login() {
             <TextField
               fullWidth
               style={{ fontFamily: "Indie Flower", fontSize: "20px" }}
-              helperText={helpText}
               variant="standard"
               label="Email"
               type="email"
@@ -170,7 +168,7 @@ function Login() {
               name="password"
               autoComplete="off"
               autoFocus={true}
-              helperText={helpText}
+              
               onChange={(e) => {
                 document.querySelector(".loginButton").style.left = "0px";
                 document
@@ -211,7 +209,7 @@ function Login() {
               className="form-input-field password"
             />
             <p className="signup-text">
-              Don't have an account?{" "}
+              Do not have an account?{" "}
               <a className="signup-link" href="/register">
                 Sign Up
               </a>

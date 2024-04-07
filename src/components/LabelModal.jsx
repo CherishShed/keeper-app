@@ -54,6 +54,17 @@ export default function AddLabelModal() {
         dispatchSnack({ type: "OPEN_ERROR_SNACK" });
       });
   };
+  function deleteLabel(labelid){
+        axios.delete(`http://localhost:8081/deleteLabel?id=${labelid}`, {
+          headers: { Authorization: localStorage.getItem("token") }}).then((response)=>{
+            console.log(response)
+            setLabels([...response.data.data])
+          dispatchSnack({ type: "OPEN_SUCCESS_SNACK" });
+          }
+            
+          ).catch((error)=>{console.log(error)
+          dispatchSnack({ type: "OPEN_ERROR_SNACK" });})
+    }
   return (
     <div>
       <Modal
@@ -91,7 +102,8 @@ export default function AddLabelModal() {
             <List>
               {labels.map((label, index) => {
                 return (
-                  <LabelModalList key={label._id} label={label} index={index} editLabel={editLabel}></LabelModalList>
+                  <LabelModalList key={label._id} label={label} index={index} editLabel={editLabel}
+                  deleteLabel={deleteLabel}></LabelModalList>
                 )
               })}
             </List>

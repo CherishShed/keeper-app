@@ -32,7 +32,13 @@ import ProfileMenu from "./ProfileMenu";
 import { SnackText, LabelModal } from "../contexts/HomeContext";
 import AddLabelModal from "./LabelModal";
 import { LabelContext } from "../contexts/LabelContext";
-
+import PropTypes from "prop-types";
+ClippedDrawer.propTypes = {
+  user:{},
+  notes:[],
+  getLabel:PropTypes.func.isRequired,
+  getAllNotes:PropTypes.func.isRequired,
+};
 const drawerWidth = 240;
 
 const openedMixin = (theme) => ({
@@ -57,14 +63,6 @@ const closedMixin = (theme) => ({
   },
 });
 
-const DrawerHeader = styled("div")(({ theme }) => ({
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "flex-end",
-  padding: theme.spacing(0, 1),
-  // necessary for content to be below app bar
-  ...theme.mixins.toolbar,
-}));
 
 const Drawer = styled(MuiDrawer, {
   shouldForwardProp: (prop) => prop !== "open",
@@ -90,10 +88,10 @@ export default function ClippedDrawer(props) {
   const [loading, setLoading] = useState(true);
   const [open, setOpen] = useState(true);
   const [user, setUser] = useState({ ...props.user });
-  const { labels, setLabels } = useContext(LabelContext);
+  const { labels } = useContext(LabelContext);
   const [anchorEl, setAnchorEl] = useState(null);
   const profileOpen = Boolean(anchorEl);
-  const { modalOpen, setModalOpen } = useContext(LabelModal);
+  const { setModalOpen } = useContext(LabelModal);
   const { dispatchSnack } = useContext(SnackText);
   //   console.log(modalOpen, setModalOpen);
   const handleLabelModalOpen = () => setModalOpen(true);
@@ -270,7 +268,7 @@ export default function ClippedDrawer(props) {
                   </div>
                 )}
                 {!loading &&
-                  labels.map((label, index) => (
+                  labels.map((label) => (
                     <Tab
                       key={label._id}
                       label={label.key}

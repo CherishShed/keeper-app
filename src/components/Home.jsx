@@ -46,31 +46,7 @@ function Home() {
   }, []);
 
 
-  function addItem(noteText) {
-    console.log("creatig");
-    console.log(noteText);
-    if (noteText) {
-      console.log("posting");
-      axios
-        .post("http://localhost:8081/api", noteText, {
-          headers: { Authorization: localStorage.getItem("token") },
-        })
-        .then((response) => {
-          console.log(response);
-          console.log("in here");
-          if (response.data.status === "success") {
-            console.log("second");
-            getUserData();
-            // dispatchSnack({ type: "OPEN_SUCCESS_SNACK" });
-          }
-        })
-        .catch((err) => {
-          if (err.response.data === "Unauthorized") {
-            window.location.pathname = "/login";
-          }
-        });
-    }
-  }
+ 
   const getLabel = (e) => {
     axios
       .get(`http://localhost:8081/api/label/${e.target.textContent}`, {
@@ -109,7 +85,7 @@ function Home() {
         <div>
           <LabelContextProvider>
             <LabelModalContextProvider>
-              <AddNote handleSubmit={addItem} />
+              <AddNote getUserData={getUserData} />
               <SnackTextContextProvider>
                 <TemporaryDrawer
                   notes={notes}

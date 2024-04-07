@@ -1,13 +1,12 @@
-import React, { useEffect, useState } from "react";
-import ReactDOM from "react-dom";
+import { useEffect, useState } from "react";
 import styles from "../signup.module.css";
 import {
-  Box,
+  
   Button,
   FormControl,
   InputAdornment,
   TextField,
-  Typography,
+  
 } from "@mui/material";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import EnhancedEncryptionIcon from "@mui/icons-material/EnhancedEncryption";
@@ -20,7 +19,6 @@ import "react-toastify/dist/ReactToastify.css";
 function Login() {
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({ username: "", password: "" });
-  const [helpText, setHelpText] = useState("");
   const [toastText, settoastText] = useState("");
   const [textColor, settextColor] = useState("red");
   const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -136,7 +134,7 @@ function Login() {
             <TextField
               fullWidth
               style={{ fontFamily: "Indie Flower", fontWeight: "bold" }}
-              helperText={helpText}
+              
               variant="standard"
               label="Email"
               type="email"
@@ -167,7 +165,7 @@ function Login() {
             <TextField
               key={2}
               name="password"
-              helperText={helpText}
+              
               onChange={(e) => {
                 handleCheck();
                 const elements = document.getElementsByClassName(
@@ -211,7 +209,7 @@ function Login() {
               className={styles["form-input-field password"]}
             />
             <p className={styles["signup-text"]}>
-              Don't have an account?{" "}
+              Already have an account?{" "}
               <a className={styles["signup-link"]} href="/login">
                 Login
               </a>
