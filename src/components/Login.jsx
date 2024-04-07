@@ -2,12 +2,12 @@ import { useEffect, useState } from "react";
 import "../auth.css";
 import {
   
-  Button,
   FormControl,
   InputAdornment,
   TextField,
   
 } from "@mui/material";
+import { LoadingButton } from '@mui/lab'
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import EnhancedEncryptionIcon from "@mui/icons-material/EnhancedEncryption";
 import { IconButton } from "@mui/material";
@@ -15,13 +15,15 @@ import { VisibilityOffOutlined, VisibilityOutlined } from "@mui/icons-material";
 import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({ username: "", password: "" });
   const [toastText, settoastText] = useState("");
   const handleClickShowPassword = () => setShowPassword((show) => !show);
-
+  const navigate = useNavigate()
+const [loading, setLoading] = useState(false)
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
   };
@@ -86,13 +88,15 @@ function Login() {
   function handleSubmit(event) {
     console.log("here");
     event.preventDefault();
-    axios.post("http://localhost:8081/login", formData).then((result) => {
+    setLoading(true)
+    axios.post("https://keeper-backend-psi.vercel.app/login", formData).then((result) => {
       console.log(result);
       settoastText(result.data.message);
       setTimeout(() => {
         if (result.data.success) {
+          setLoading(false)
           localStorage.setItem("token", result.data.token);
-          window.location.pathname = "/";
+          navigate("/");
         }
       }, 500);
     });
@@ -214,16 +218,17 @@ function Login() {
                 Sign Up
               </a>
             </p>
-            <Button
-              className="loginButton"
+            <LoadingButton
+            className="loginButton"
               type="submit"
               variant="contained"
               size="large"
               onMouseEnter={(e) => handleButton(e)}
               style={{ backgroundColor: "rgb(121, 68, 59)" }}
+              loading={loading}
             >
-              Login
-            </Button>
+              <span>Login</span>
+            </LoadingButton>
           </FormControl>
         </div>
       </div>

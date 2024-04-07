@@ -31,7 +31,7 @@ function AddNote(props) {
       console.log("posting");
 
       axios
-        .post("http://localhost:8081/api", noteText, {
+        .post("https://keeper-backend-psi.vercel.app/api", noteText, {
           headers: { Authorization: localStorage.getItem("token") },
         })
         .then((response) => {

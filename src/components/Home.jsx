@@ -14,7 +14,7 @@ function Home() {
   const [loading, setLoading] = useState(true);
   function getUserData() {
     axios
-      .get("http://localhost:8081/", {
+      .get("https://keeper-backend-psi.vercel.app/", {
         headers: { Authorization: localStorage.getItem("token") },
       })
       .then((response) => {
@@ -49,7 +49,7 @@ function Home() {
  
   const getLabel = (e) => {
     axios
-      .get(`http://localhost:8081/api/label/${e.target.textContent}`, {
+      .get(`https://keeper-backend-psi.vercel.app/api/label/${e.target.textContent}`, {
         headers: { Authorization: localStorage.getItem("token") },
       })
       .then((result) => {

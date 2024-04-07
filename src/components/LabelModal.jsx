@@ -29,7 +29,7 @@ export default function AddLabelModal() {
   const { labels, setLabels } = useContext(LabelContext);
   const handleClose = () => setModalOpen(false);
   const addLabel = (labelKey) => {
-    axios.post("http://localhost:8081/newLabel", { key: labelKey }, {
+    axios.post("https://keeper-backend-psi.vercel.app/newLabel", { key: labelKey }, {
       headers: { Authorization: localStorage.getItem("token") },
     })
       .then((res) => {
@@ -42,7 +42,7 @@ export default function AddLabelModal() {
       });
   };
   const editLabel = (oldKey, newKey) => {
-    axios.patch("http://localhost:8081/editLabel", { oldKey, newKey }, {
+    axios.patch("https://keeper-backend-psi.vercel.app/editLabel", { oldKey, newKey }, {
       headers: { Authorization: localStorage.getItem("token") },
     })
       .then((res) => {
@@ -55,7 +55,7 @@ export default function AddLabelModal() {
       });
   };
   function deleteLabel(labelid){
-        axios.delete(`http://localhost:8081/deleteLabel?id=${labelid}`, {
+        axios.delete(`https://keeper-backend-psi.vercel.app/deleteLabel?id=${labelid}`, {
           headers: { Authorization: localStorage.getItem("token") }}).then((response)=>{
             console.log(response)
             setLabels([...response.data.data])
@@ -91,7 +91,9 @@ export default function AddLabelModal() {
               ),
               endAdornment: (
                 <InputAdornment position="end">
-                  <Button color="success" onClick={() => addLabel(labelKey)}>
+                  <Button color="success" onClick={() => {
+                    setLabelKey("")
+                    addLabel(labelKey)}}>
                     <DoneIcon></DoneIcon>
                   </Button>
                 </InputAdornment>

@@ -26,7 +26,7 @@ function DetailsForm() {
         }
     }
     useEffect(() => {
-        axios.get("http://localhost:8081/", { headers: { Authorization: localStorage.getItem("token") } })
+        axios.get("https://keeper-backend-psi.vercel.app/", { headers: { Authorization: localStorage.getItem("token") } })
             .then((result) => {
                 console.log(result);
                 if (result.data.success) {
@@ -63,7 +63,7 @@ function DetailsForm() {
     function handleSubmit(event) {
         console.log("here");
         event.preventDefault();
-        axios.post("http://localhost:8081/userDetails", event.target, { headers: { Authorization: localStorage.getItem("token") } })
+        axios.post("https://keeper-backend-psi.vercel.app/userDetails", event.target, { headers: { Authorization: localStorage.getItem("token") } })
             .then((result) => {
                 console.log(result);
                 settoastText(result.data.message)

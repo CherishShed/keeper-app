@@ -99,7 +99,7 @@ export default function ClippedDrawer(props) {
     const itemToDelete = notes[itemIndex];
     console.log(itemToDelete._id);
     axios
-      .delete(`http://localhost:8081/api/${itemToDelete._id}`)
+      .delete(`https://keeper-backend-psi.vercel.app/api/${itemToDelete._id}`)
       .then((response) => {
         console.log(response);
         if (response.data.status === "success") {

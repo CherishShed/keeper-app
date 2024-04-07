@@ -53,6 +53,7 @@ function Login() {
     const usernameLength = formData.username.length;
     const offset = ev.target.offsetLeft;
     console.log(passLength, offset);
+    handleCheck()
     let displace = "0px";
     if (passLength < 8 || usernameLength < 8) {
       if (offset <= 98) {
@@ -78,15 +79,16 @@ function Login() {
     } else {
       document.getElementsByClassName(
         styles.loginButton
-      )[0].style.backgroundColor = " rgb(24, 100, 65)";
+      )[0].style.backgroundColor = "rgb(24, 100, 65)";
       settextColor("green");
     }
   }
 
+  
   function handleSubmit(event) {
     console.log("here");
     event.preventDefault();
-    axios.post("http://localhost:8081/register", formData).then((result) => {
+    axios.post("https://keeper-backend-psi.vercel.app/register", formData).then((result) => {
       console.log(result);
       settoastText(result.data.message);
       setTimeout(() => {
