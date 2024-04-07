@@ -46,7 +46,13 @@ const [loading, setLoading] = useState(false)
         theme: "light",
       });
     } else {
-      return;
+       toast.error(toastText, {
+        position: toast.POSITION.TOP_RIGHT,
+        className: "foo-bar",
+        pauseOnHover: false,
+        autoClose: 1000,
+        theme: "light",
+      });
     }
 
     settoastText("");
@@ -99,7 +105,11 @@ const [loading, setLoading] = useState(false)
           navigate("/");
         }
       }, 500);
-    });
+    }).catch(()=>{
+      setLoading(false)
+      settoastText('An error occured')
+
+    })
   }
   window.addEventListener("load", () => {
     document.getElementById("usernameInput").focus();
